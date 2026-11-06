@@ -1040,5 +1040,210 @@ if(/[?&#]present/.test(location.href))setTimeout(pOpen,400);
 
 observe();new MutationObserver(observe).observe(document.body,{childList:true,subtree:true});
 </script>
+<!-- ===== Meera: virtual host ===== -->
+<style>
+.gd-fab{position:fixed;z-index:70;right:max(18px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:12px;padding:6px 20px 6px 6px;border-radius:999px;background:rgba(21,16,12,.92);color:var(--ivory);border:1px solid rgba(216,167,126,.45);box-shadow:0 14px 40px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transform:translateY(140%);opacity:0;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s}
+.gd-fab.show{transform:none;opacity:1}
+.gd-fab img{width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid var(--copper2)}
+.gd-fab b{display:block;font:400 19px/1.1 var(--serif);letter-spacing:.01em}
+.gd-fab small{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--copper2);margin-top:3px}
+.gd-fab .pulse{position:absolute;left:6px;top:6px;width:54px;height:54px;border-radius:50%;box-shadow:0 0 0 0 rgba(216,167,126,.6);animation:gdp 2.4s infinite}
+@keyframes gdp{0%{box-shadow:0 0 0 0 rgba(216,167,126,.55)}70%{box-shadow:0 0 0 16px rgba(216,167,126,0)}100%{box-shadow:0 0 0 0 rgba(216,167,126,0)}}
+.gd{position:fixed;z-index:75;right:max(18px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));width:min(400px,calc(100vw - 36px));height:min(640px,calc(100svh - 110px));display:flex;flex-direction:column;background:#17110D;color:var(--ivory);border:1px solid rgba(216,167,126,.3);border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.5);overflow:hidden;transform:translateY(20px) scale(.97);opacity:0;pointer-events:none;transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .35s}
+.gd.on{transform:none;opacity:1;pointer-events:auto}
+.gd-head{display:flex;align-items:center;gap:14px;padding:16px 16px 14px;border-bottom:1px solid rgba(245,240,233,.1);background:linear-gradient(180deg,rgba(185,131,90,.16),transparent)}
+.gd-face{position:relative;width:68px;height:68px;flex:none}
+.gd-face img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2px solid var(--copper2);animation:gdb 5s ease-in-out infinite}
+@keyframes gdb{50%{transform:scale(1.025)}}
+.gd-face i{position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--copper2);opacity:0;transition:opacity .3s}
+.gd.talking .gd-face i{opacity:1;animation:gdt .9s ease-in-out infinite}
+@keyframes gdt{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.09);opacity:.3}}
+.gd-who{flex:1;min-width:0}
+.gd-who b{display:block;font:400 24px/1 var(--serif)}
+.gd-who span{display:block;font-size:12px;color:rgba(245,240,233,.6);margin-top:5px}
+.gd-wave{display:flex;gap:3px;align-items:center;height:16px;margin-top:6px}
+.gd-wave em{width:3px;height:4px;border-radius:2px;background:var(--copper2);transition:height .12s}
+.gd-x,.gd-mute{width:36px;height:36px;border-radius:50%;border:1px solid rgba(245,240,233,.2);font-size:16px;flex:none;color:var(--ivory)}
+.gd-x:hover,.gd-mute:hover{background:rgba(245,240,233,.1)}
+.gd-log{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}
+.gd-m{max-width:88%;padding:11px 14px;border-radius:16px;font-size:14.5px;line-height:1.55}
+.gd-m.her{background:rgba(245,240,233,.07);border-top-left-radius:4px;align-self:flex-start}
+.gd-m.me{background:var(--copper);color:#fff;border-top-right-radius:4px;align-self:flex-end}
+.gd-m .act{display:inline-flex;margin-top:9px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--copper2);border:1px solid rgba(216,167,126,.5);border-radius:999px;padding:6px 12px}
+.gd-m .act:hover{background:rgba(216,167,126,.15)}
+.gd-tour{display:flex;align-items:center;gap:10px;padding:10px 16px;border-top:1px solid rgba(245,240,233,.1);font-size:12.5px;color:rgba(245,240,233,.7)}
+.gd-tour .bar{flex:1;height:3px;background:rgba(245,240,233,.12);border-radius:2px;overflow:hidden}
+.gd-tour .bar i{display:block;height:100%;width:0;background:var(--copper2);transition:width .5s}
+.gd-tour button{font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(245,240,233,.25);border-radius:999px;padding:6px 11px;color:var(--ivory)}
+.gd-chips{display:flex;gap:7px;overflow-x:auto;padding:10px 16px 2px;scrollbar-width:none}
+.gd-chips::-webkit-scrollbar{display:none}
+.gd-chips button{flex:none;font-size:12.5px;border:1px solid rgba(216,167,126,.4);border-radius:999px;padding:7px 12px;color:rgba(245,240,233,.88);background:rgba(216,167,126,.07)}
+.gd-chips button:hover{background:rgba(216,167,126,.18)}
+.gd-in{display:flex;gap:8px;padding:10px 12px calc(12px + env(safe-area-inset-bottom,0px))}
+.gd-in input{flex:1;min-width:0;background:rgba(245,240,233,.07);border:1px solid rgba(245,240,233,.15);border-radius:999px;padding:11px 16px;color:var(--ivory);font:inherit;font-size:14.5px}
+.gd-in input:focus{outline:none;border-color:var(--copper2)}
+.gd-in button{width:44px;height:44px;flex:none;border-radius:50%;background:var(--copper);color:#fff;font-size:17px}
+.gd-in .mic{background:rgba(245,240,233,.1)}
+.gd-in .mic.rec{background:var(--red);animation:gdt 1s infinite}
+.gd-note{font-size:10.5px;color:rgba(245,240,233,.4);text-align:center;padding:0 16px 8px}
+.gd-spot{outline:2px solid rgba(216,167,126,.0);transition:outline-color .6s}
+@media (max-width:520px){.gd{right:0;left:0;bottom:0;width:100%;height:min(78svh,620px);border-radius:22px 22px 0 0}.gd-fab{padding:5px 16px 5px 5px}.gd-fab img,.gd-fab .pulse{width:46px;height:46px}.gd-fab .pulse{left:5px;top:5px}.gd-fab b{font-size:17px}}
+@media (prefers-reduced-motion:reduce){.gd-fab .pulse,.gd-face img,.gd.talking .gd-face i{animation:none}}
+</style>
+
+<button class="gd-fab" id="gd-fab" aria-label="Talk to Meera, your virtual host"><span class="pulse"></span><img src="img/host.jpg" alt=""><span><b>Talk to Meera</b><small>Your Konak host</small></span></button>
+<aside class="gd" id="gd" role="dialog" aria-label="Meera, virtual host">
+ <div class="gd-head">
+  <div class="gd-face"><img src="img/host.jpg" alt="Meera"><i></i></div>
+  <div class="gd-who"><b>Meera</b><span>Virtual host · Konak Clubhouse</span><div class="gd-wave" id="gd-wave" aria-hidden="true"><em></em><em></em><em></em><em></em><em></em><em></em><em></em></div></div>
+  <button class="gd-mute" id="gd-mute" aria-label="Turn voice off" title="Voice on/off">🔊</button>
+  <button class="gd-x" id="gd-x" aria-label="Close">✕</button>
+ </div>
+ <div class="gd-log" id="gd-log" aria-live="polite"></div>
+ <div class="gd-tour" id="gd-tourbar" hidden><span id="gd-step">Tour</span><div class="bar"><i id="gd-prog"></i></div><button id="gd-pause">Pause</button><button id="gd-stop">Stop</button></div>
+ <div class="gd-chips" id="gd-chips"></div>
+ <form class="gd-in" id="gd-form" autocomplete="off"><button type="button" class="mic" id="gd-mic" aria-label="Ask by voice" title="Ask by voice">🎙</button><input id="gd-q" placeholder="Ask Meera about the clubhouse…" aria-label="Your question"><button type="submit" aria-label="Send">➤</button></form>
+ <div class="gd-note">Meera answers from the Konak clubhouse design brief.</div>
+</aside>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const fab=$("#gd-fab"),gd=$("#gd"),log=$("#gd-log"),chips=$("#gd-chips");
+let voiceOn=true;try{voiceOn=localStorage.getItem("gd-voice")!=="off"}catch(e){}
+const synth=window.speechSynthesis;let VOICE=null;
+function pickVoice(){if(!synth)return;const vs=synth.getVoices();if(!vs.length)return;
+ const pref=[v=>/en-IN/i.test(v.lang)&&/female|heera|veena|neerja|swara|kajal|aditi|raveena/i.test(v.name),v=>/en-IN/i.test(v.lang),v=>/en-GB/i.test(v.lang)&&/female|libby|sonia|serena|kate|martha|google uk english female/i.test(v.name),v=>/en/i.test(v.lang)&&/female|samantha|zira|aria|jenny|karen|moira|tessa|victoria/i.test(v.name),v=>/^en/i.test(v.lang)];
+ for(const f of pref){const v=vs.find(f);if(v){VOICE=v;break}}}
+if(synth){pickVoice();synth.onvoiceschanged=pickVoice}
+$("#gd-mute").textContent=voiceOn?"🔊":"🔇";
+
+/* --- speaking + wave --- */
+const waves=[...document.querySelectorAll("#gd-wave em")];let waveT=null;
+function talking(on){gd.classList.toggle("talking",on);clearInterval(waveT);if(on)waveT=setInterval(()=>waves.forEach(w=>w.style.height=(4+Math.random()*12)+"px"),120);else waves.forEach(w=>w.style.height="4px")}
+function say(text,done){
+ const plain=text.replace(/<[^>]+>/g,"");
+ if(!voiceOn||!synth){const ms=Math.max(2600,plain.split(/\s+/).length*330);talking(true);clearTimeout(say.t);say.t=setTimeout(()=>{talking(false);done&&done()},voiceOn&&!synth?ms:ms*.75);return}
+ synth.cancel();
+ const parts=plain.match(/[^.!?]+[.!?]*/g)||[plain];let i=0;
+ const next=()=>{if(i>=parts.length){talking(false);done&&done();return}
+  const u=new SpeechSynthesisUtterance(parts[i++].trim());if(VOICE)u.voice=VOICE;u.lang=VOICE?VOICE.lang:"en-IN";u.rate=.96;u.pitch=1.04;
+  u.onstart=()=>talking(true);u.onend=()=>{if(!stopped)next()};u.onerror=()=>{talking(false);if(!stopped)done&&done()};synth.speak(u)};
+ stopped=false;next()}
+let stopped=false;
+function hush(){stopped=true;clearTimeout(say.t);if(synth)synth.cancel();talking(false)}
+
+/* --- chat --- */
+function add(who,html,act){const d=document.createElement("div");d.className="gd-m "+who;d.innerHTML=html;
+ if(act){const b=document.createElement("button");b.className="act";b.textContent=act.label;b.onclick=act.fn;d.appendChild(document.createElement("br"));d.appendChild(b)}
+ log.appendChild(d);log.scrollTop=log.scrollHeight;return d}
+const go=id=>{const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:"smooth",block:"start"})};
+const floor=f=>{go("floors");setTimeout(()=>{const b=document.querySelector(`.ftab[data-f="${f}"]`);b&&b.click()},500)};
+const viewSpace=name=>{const s=SPACES.find(x=>x.n===name);if(s&&s.r.length)openLB(s.r.map(n=>({n,t:s.n,d:s.d,c:FL[s.f]})),0)};
+function reply(text,act){add("her",text,act);say(text)}
+
+/* --- knowledge --- */
+const KB=[
+ {k:/\b(hi|hello|hey|namaste|namaskar|hai)\b/,a:"Namaste! I'm Meera. I can take you on a three-minute guided tour of the clubhouse, or answer anything about its design. What would you like to know?"},
+ {k:/differ|special|unique|why konak|better|other club|compare|usp/,a:"Three things set Konak apart. First, there's a landscaped courtyard at its heart where other clubhouses have a reception lobby. Second, daylight comes in through the middle of the building, with double-height spaces. Third, it's built for daily life, with guest rooms, a salon, a grocery store and a first-aid room, not just weekend amenities.",go:"different",label:"See what's different"},
+ {k:/\bsize\b|how big|\bsq\.? ?ft|square f|sft|built.?up|\barea\b|how large|\bfeet\b/,a:"The clubhouse is about 30,000 square feet over three floors, serving the 120 families of Konak."},
+ {k:/floor|level|storey|story/,a:"There are three floors, each with its own mood. The ground floor is for unwinding, the first floor is for movement and celebration, and the second floor is for play and rest.",go:"floors",label:"Explore the floors"},
+ {k:/courtyard|garden|forest|lawn|waterfall|water|boulder|green|nature|plant/,a:"The courtyard is the heart of Konak. It's an indoor garden with a soft lawn for children, smooth white boulders to sit and climb on, ferns and palms, and a shallow waterfall running down a travertine wall. It's lit from above.",go:"heart",label:"Show the courtyard"},
+ {k:/ribbon|sculpture|red|art|artwork/,a:"The red ribbon sculpture floats through the full height of the courtyard. It's the signature art piece of the clubhouse, and you can see it from the lounges, the stair and the first-floor lobby. Art pieces throughout the building add colour and start conversations.",space:"The courtyard"},
+ {k:/pool|swim/,a:"The swimming pool sits under a louvred timber ceiling, with matte stone, a lounger deck and a row of tall trees beyond. There's also a gallery lounge where grandparents can watch the little ones swim.",space:"Swimming pool & deck"},
+ {k:/gym|fitness|workout|exercise|cardio|weights/,a:"The fitness centre on the first floor has cardio, strength and functional training zones under a sculpted ceiling of light. It's a full gym, right at home.",space:"Fitness centre"},
+ {k:/yoga|dance|studio|zumba|aerobic|class/,a:"The studio is bright and open, with daylight on two sides. It's for yoga, dance, Zumba and group classes.",space:"Studio"},
+ {k:/badminton|shuttle/,a:"The badminton court is double-height, with a professional sports floor and gallery seating, so families can cheer from the side.",space:"Badminton court"},
+ {k:/squash/,a:"The squash court is double-height and competition-style, with high-impact walls and proper sports lighting.",space:"Squash court"},
+ {k:/sport|game|play|snooker|pool table|billiard|table tennis|carrom|chess/,a:"For sport there's badminton, squash and the pool. The indoor games room on the second floor has snooker, table tennis and carrom, with lounge seating in between. It's where teenagers and grandparents end up playing together.",space:"Indoor games"},
+ {k:/theatre|theater|movie|cinema|film|screen/,a:"The home theatre on the second floor seats 27 in reclining chairs, with acoustic panelling, a large screen and a snack counter. It's perfect for premieres, cricket finals and family movie nights.",space:"Home theatre"},
+ {k:/banquet|party|celebrat|function|wedding|birthday|event|hall|stage|festival/,a:"The banquet hall is on the first floor. It has fabric and brass panelling, a signature chandelier ceiling, a stage and a double-height volume. Birthdays, anniversaries and festivals can all be hosted right at home.",space:"Banquet hall & stage"},
+ {k:/guest|stay|room|relative|visitor|hotel|sleep/,a:"There are hotel-style guest rooms on the second floor, with upholstered bed walls, warm lighting and private bathrooms. When family visits, there's a room for them.",space:"Guest rooms"},
+ {k:/work|office|meeting|conference|co-?work|laptop|business/,a:"There's a daylit conference room with a glowing stretch ceiling and space to work beside it. You can take the big call, then go for a swim.",space:"Conference & co-working"},
+ {k:/salon|hair|spa|beauty|grooming/,a:"There's a salon on the ground floor, with mirror stations facing the windows behind a slatted timber screen. You can get a haircut without leaving home.",space:"Salon"},
+ {k:/grocery|shop|store|milk|essential|market/,a:"A grocery store on the ground floor is styled like a neighbourhood deli, with timber ceiling slats and island shelving. Daily essentials are a two-minute walk away.",space:"Grocery store"},
+ {k:/doctor|medical|first.?aid|health|clinic|emergency/,a:"There's a first-aid and consultation room on the ground floor. It's calm and softly coloured, with a curtained patient bay, for peace of mind at every age.",space:"First aid & consultation"},
+ {k:/lounge|sit|relax|cafe|coffee|reception|lobby|arrival/,a:"The arrival lounges have organic sofas gathered around planter islands, under warm pendant lights. It's like a living room for the whole community.",space:"Arrival lounges"},
+ {k:/kid|child|children|toddler|son|daughter/,a:"Children get the indoor lawn and climbing boulders, the pool, the badminton court and the games room. Parents can watch them from the lounges nearby.",go:"family",label:"For every generation"},
+ {k:/elder|senior|parent|grand|old age|aged/,a:"For grandparents there are quiet lounges, the pool gallery, yoga and studio sessions, and a first-aid room close at hand. The guest rooms are ready for visiting family too.",go:"family",label:"For every generation"},
+ {k:/material|finish|stone|marble|wood|timber|metal|brass|plaster|palette|colou?r/,a:"The palette is deliberately calm: stone, plaster, wood, metal and greenery. It feels rich without being loud, and it's chosen to age well. As the design team puts it, materials age, finishes evolve, stories remain.",go:"materials",label:"See the materials"},
+ {k:/light|lighting|chandelier|daylight|bright/,a:"Lighting is layered. Daylight comes in from above through the courtyard, with warm cove lighting, sculptural pendants and accent lights for the art. The banquet hall has a signature chandelier ceiling."},
+ {k:/day|routine|daily|morning|evening|life/,a:"A typical day might begin with sunrise laps and yoga, then a meeting in the conference room, errands at the grocery store and salon, kids on the lawn at four-thirty, badminton at six, a celebration at eight and a movie at ten.",go:"day",label:"A day at Konak"},
+ {k:/where|location|address|map|direction|reach|konapur|chimaldari/,a:"Konak is at Chimaldari Konapur, Hyderabad, Telangana. I can open the map for you.",act:{label:"Open the map",fn:()=>window.open("https://maps.app.goo.gl/iSK5qghKauq3zsXy5","_blank","noopener")}},
+ {k:/price|cost|rate|budget|emi|loan|book|booking|availab|plot|villa|mansion|buy|purchase|offer/,a:"For prices, availability and bookings, please speak to your Ankura Homes relationship manager. They can also arrange a site visit to see the clubhouse in person."},
+ {k:/when|ready|complet|possession|handover|timeline|open/,a:"For the latest on completion and handover, please check with your Ankura Homes relationship manager. They'll have the current schedule."},
+ {k:/park|car|lift|elevator|access|wheelchair/,a:"That's a good practical question. Please check the details with your Ankura Homes relationship manager so you get the confirmed answer."},
+ {k:/photo|picture|image|render|gallery|view/,a:"You can browse every design view in the gallery, filtered by floor.",go:"gallery",label:"Open the gallery"},
+ {k:/present|slideshow|show me|full ?screen/,a:"I'll start the full-screen presentation for you.",act:{label:"Start presentation",fn:()=>document.querySelector("#visit [data-present]").click()}},
+ {k:/who are you|your name|are you real|human|robot|\bai\b/,a:"I'm Meera, a virtual host for the Konak clubhouse. I'm not a real person, but everything I tell you comes from the clubhouse design brief."},
+ {k:/thank|thanks|great|nice|lovely|beautiful|wow/,a:"Thank you! It really is a special place. Is there a space you'd like to see more of?"}
+];
+const SUGG=["Take the tour","What makes it different?","Tell me about the courtyard","Is there a pool?","What's for kids?","Show the banquet hall","Guest rooms?","Where is it?"];
+function drawChips(list){chips.innerHTML="";list.forEach(t=>{const b=document.createElement("button");b.type="button";b.textContent=t;b.onclick=()=>ask(t);chips.appendChild(b)})}
+function ask(q){if(!q.trim())return;hush();add("me",q.replace(/</g,"&lt;"));
+ const s=q.toLowerCase();
+ if(/tour|walk me|guide me|show me around|explain (the )?(whole|design|everything)/.test(s)){startTour();return}
+ const sp=SPACES.find(x=>x.r.length&&s.includes(x.n.toLowerCase().split(/[ &]/)[0]));
+ const hit=KB.find(e=>e.k.test(s));
+ setTimeout(()=>{
+  if(hit){let act=hit.act||null;
+   if(hit.space)act={label:"See the "+hit.space.toLowerCase(),fn:()=>viewSpace(hit.space)};
+   else if(hit.go)act={label:hit.label||"Show me",fn:()=>go(hit.go)};
+   reply(hit.a,act);if(hit.go&&!hit.space)go(hit.go)}
+  else if(sp)reply(`${sp.n}: ${sp.d} ${sp.l}`,{label:"See the views",fn:()=>viewSpace(sp.n)});
+  else reply("That's a good question for our sales team, and your Ankura Homes relationship manager can confirm it. Meanwhile, I can tell you about the courtyard, the pool, sports, the banquet hall, the theatre, the guest rooms or the materials.");
+ },350)}
+
+/* --- guided tour --- */
+const TOUR=[
+ ["Welcome",null,"Namaste, I'm Meera, your host at Konak. Let me walk you through the clubhouse. It takes about three minutes, and you can ask me anything along the way."],
+ ["The idea","idea","Most clubhouses are a list of amenities. At Konak, the clubhouse is designed as a landscape you walk into. It's thirty thousand square feet over three floors, made for the hundred and twenty families of Konak."],
+ ["The courtyard","heart","At its centre is something you won't find in other clubhouses: a garden. It's an indoor courtyard with a lawn for children, smooth boulders to sit on, a waterfall on a travertine wall, and a red ribbon sculpture floating through the full height of the building."],
+ ["Why it's different","different","So what makes it different? It has a garden instead of a lobby, and daylight brought into the middle of the building. It has flowing, curved spaces instead of corridors, and art you live with. It has hotel-style guest rooms for visiting family, and a calm, rich palette that won't date."],
+ ["Ground floor","GF","The ground floor is for unwinding. It has the arrival lounges, the courtyard, the swimming pool under its timber canopy, a badminton court, a salon, a grocery store and a first-aid room."],
+ ["First floor","FF","The first floor is for movement and celebration. It has a fitness centre, a yoga and dance studio, a squash court, a conference room for working close to home, and the banquet hall with its own stage."],
+ ["Second floor","SF","The second floor is for play and rest. It has a home theatre for twenty-seven, an indoor games room, and hotel-style guest rooms."],
+ ["A day here","day","Imagine a day here. It starts with sunrise laps and yoga in the studio. Then a meeting in the conference room, and errands done downstairs. Children play on the indoor lawn, there's badminton in the evening and a celebration in the banquet hall, and the day ends with a movie night."],
+ ["Every generation","family","It's designed for every generation, from toddlers to grandparents, so the whole family has a reason to come down every day."],
+ ["Materials","materials","The finishes are deliberately calm: stone, plaster, wood, metal and greenery. Materials age. Finishes evolve. Stories remain."],
+ ["Gallery","gallery","Every view of every space is here in the gallery, so you can explore at your own pace."],
+ ["Life, unfolded","visit","That's the Konak clubhouse. Life, unfolded. Ask me anything, or speak to our team to arrange a site visit."]
+];
+let T={i:-1,on:false,paused:false};
+function tourStep(i){T.i=i;if(i>=TOUR.length){endTour(true);return}
+ const [title,target,text]=TOUR[i];$("#gd-step").textContent=`${i+1}/${TOUR.length} · ${title}`;$("#gd-prog").style.width=((i+1)/TOUR.length*100)+"%";
+ if(target==="GF"||target==="FF"||target==="SF")floor(target);else if(target)go(target);
+ add("her",text);
+ if(target==="heart"){const steps=[...document.querySelectorAll("#heart .step")];let k=0;const adv=()=>{if(!T.on||T.i!==i||k>=steps.length)return;steps[k++].scrollIntoView({behavior:"smooth",block:"center"});setTimeout(adv,3800)};setTimeout(adv,900)}
+ say(text,()=>{if(T.on&&!T.paused&&T.i===i)setTimeout(()=>{if(T.on&&!T.paused&&T.i===i)tourStep(i+1)},900)})}
+function startTour(){hush();T={i:-1,on:true,paused:false};$("#gd-tourbar").hidden=false;$("#gd-pause").textContent="Pause";tourStep(0)}
+function endTour(done){T.on=false;hush();$("#gd-tourbar").hidden=true;if(done)drawChips(["What makes it different?","Tell me about the courtyard","Show the banquet hall","What's for kids?","Where is it?"])}
+$("#gd-pause").onclick=()=>{if(!T.on)return;T.paused=!T.paused;$("#gd-pause").textContent=T.paused?"Resume":"Pause";if(T.paused)hush();else tourStep(T.i+1)};
+$("#gd-stop").onclick=()=>{endTour(false);add("her","Tour stopped. Ask me anything, or tap a topic below.")};
+
+/* --- open / close --- */
+let greeted=false;
+function open(){gd.classList.add("on");fab.classList.remove("show");
+ if(!greeted){greeted=true;const t="Namaste! I'm Meera, your host at the Konak clubhouse. Shall I take you on a three-minute guided tour, or would you like to ask me something?";add("her",t,{label:"▶ Start the guided tour",fn:startTour});say(t);drawChips(SUGG)}
+ setTimeout(()=>$("#gd-q").focus({preventScroll:true}),300)}
+function close(){gd.classList.remove("on");hush();T.on=false;$("#gd-tourbar").hidden=true;showFab()}
+fab.onclick=open;$("#gd-x").onclick=close;
+$("#gd-mute").onclick=()=>{voiceOn=!voiceOn;$("#gd-mute").textContent=voiceOn?"🔊":"🔇";$("#gd-mute").setAttribute("aria-label",voiceOn?"Turn voice off":"Turn voice on");try{localStorage.setItem("gd-voice",voiceOn?"on":"off")}catch(e){}if(!voiceOn&&synth)synth.cancel()};
+$("#gd-form").onsubmit=e=>{e.preventDefault();const q=$("#gd-q").value;$("#gd-q").value="";ask(q)};
+addEventListener("keydown",e=>{if(e.key==="Escape"&&gd.classList.contains("on")&&!document.querySelector(".lb.on,.pres.on"))close()});
+
+/* --- voice questions --- */
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;const mic=$("#gd-mic");
+if(!SR)mic.hidden=true;else{let rec=null;mic.onclick=()=>{if(rec){rec.stop();return}hush();rec=new SR();rec.lang="en-IN";rec.interimResults=false;rec.maxAlternatives=1;mic.classList.add("rec");
+ rec.onresult=e=>{const t=e.results[0][0].transcript;ask(t)};rec.onend=()=>{mic.classList.remove("rec");rec=null};rec.onerror=()=>{mic.classList.remove("rec");rec=null};try{rec.start()}catch(e){mic.classList.remove("rec");rec=null}}}
+
+/* --- show the button once the arrival is over --- */
+const intro=document.getElementById("intro");
+function showFab(){if(gd.classList.contains("on"))return;const past=!intro||scrollY>intro.offsetTop+intro.offsetHeight-innerHeight*1.2;fab.classList.toggle("show",past)}
+addEventListener("scroll",showFab,{passive:true});showFab();
+document.addEventListener("click",e=>{if(e.target.closest("[data-present]"))hush()},true);
+})();
+</script>
+
 </body>
 </html>
