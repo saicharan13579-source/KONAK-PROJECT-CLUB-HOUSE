@@ -1859,6 +1859,17 @@ footer{background:var(--esp);border-top:1px solid rgba(226,192,138,.18)}
 .quote small{color:var(--gold-lo)}
 
 
+
+/* show complete renders (no cropping) where the frame is tall */
+.heart{grid-template-columns:1.4fr 1fr}
+.heart-media img{object-fit:contain}
+.heart-media img.bg,.gt-room img.bg{object-fit:cover;filter:blur(38px) saturate(1.1) brightness(.55);transform:scale(1.25)!important;opacity:0;transition:opacity 1.2s;animation:none!important}
+.heart-media img.bg:has(+ img.on),.gt-room img.bg:has(+ img.on){opacity:1}
+.heart-media img:not(.bg){filter:drop-shadow(0 30px 60px rgba(0,0,0,.45))}
+.gt-room img:not(.bg){object-fit:contain}
+.step .mob{aspect-ratio:16/9!important}
+@media (max-width:1100px){.heart{grid-template-columns:1.15fr 1fr}}
+
 /* ===== every screen size ===== */
 /* big monitors: scale the whole page up proportionally (the landing scales itself) */
 @media (min-width:1880px) and (min-height:980px){body>section:not(#intro),footer,.nav,.drawer,.gd,.gd-fab,.gd-teaser,.lb,.pres{zoom:1.18}}
@@ -1907,6 +1918,10 @@ footer{background:var(--esp);border-top:1px solid rgba(226,192,138,.18)}
 @media (prefers-reduced-motion:reduce){.kc-ring{display:none}}
 </style>
 <div class="kc-ring" id="kc-ring" aria-hidden="true"></div>
+<script>
+(function(){const mk=im=>{if(im.previousElementSibling&&im.previousElementSibling.classList.contains("bg"))return;const bg=document.createElement("img");bg.className="bg";bg.alt="";bg.setAttribute("aria-hidden","true");bg.decoding="async";const sync=()=>{if(im.getAttribute("src"))bg.src=im.currentSrc||im.src};sync();new MutationObserver(sync).observe(im,{attributes:true,attributeFilter:["src"]});im.addEventListener("load",sync);im.before(bg)};
+document.querySelectorAll("#heart-media img,#gt-ra,#gt-rb").forEach(mk)})();
+</script>
 <script>
 (function(){
  if(!matchMedia("(hover:hover) and (pointer:fine)").matches||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
