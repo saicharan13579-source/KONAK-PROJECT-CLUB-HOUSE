@@ -1040,7 +1040,7 @@ if(/[?&#]present/.test(location.href))setTimeout(pOpen,400);
 
 observe();new MutationObserver(observe).observe(document.body,{childList:true,subtree:true});
 </script>
-<!-- ===== Meera: virtual host ===== -->
+<!-- ===== Harshitha: virtual host ===== -->
 <style>
 .gd-fab{position:fixed;z-index:70;right:max(18px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:12px;padding:6px 20px 6px 6px;border-radius:999px;background:rgba(21,16,12,.92);color:var(--ivory);border:1px solid rgba(216,167,126,.45);box-shadow:0 14px 40px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transform:translateY(140%);opacity:0;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s}
 .gd-fab.show{transform:none;opacity:1}
@@ -1091,19 +1091,19 @@ observe();new MutationObserver(observe).observe(document.body,{childList:true,su
 @media (prefers-reduced-motion:reduce){.gd-fab .pulse,.gd-face img,.gd.talking .gd-face i{animation:none}}
 </style>
 
-<button class="gd-fab" id="gd-fab" aria-label="Talk to Meera, your virtual host"><span class="pulse"></span><img src="img/host.jpg" alt=""><span><b>Talk to Meera</b><small>Your Konak host</small></span></button>
-<aside class="gd" id="gd" role="dialog" aria-label="Meera, virtual host">
+<button class="gd-fab" id="gd-fab" aria-label="Talk to Harshitha, your virtual host"><span class="pulse"></span><img src="img/host.jpg" alt=""><span><b>Talk to Harshitha</b><small>Your Konak host</small></span></button>
+<aside class="gd" id="gd" role="dialog" aria-label="Harshitha, virtual host">
  <div class="gd-head">
-  <div class="gd-face"><img src="img/host.jpg" alt="Meera"><i></i></div>
-  <div class="gd-who"><b>Meera</b><span>Virtual host · Konak Clubhouse</span><div class="gd-wave" id="gd-wave" aria-hidden="true"><em></em><em></em><em></em><em></em><em></em><em></em><em></em></div></div>
+  <div class="gd-face"><img src="img/host.jpg" alt="Harshitha"><i></i></div>
+  <div class="gd-who"><b>Harshitha</b><span>Virtual host · Konak Clubhouse</span><div class="gd-wave" id="gd-wave" aria-hidden="true"><em></em><em></em><em></em><em></em><em></em><em></em><em></em></div></div>
   <button class="gd-mute" id="gd-mute" aria-label="Turn voice off" title="Voice on/off">🔊</button>
   <button class="gd-x" id="gd-x" aria-label="Close">✕</button>
  </div>
  <div class="gd-log" id="gd-log" aria-live="polite"></div>
  <div class="gd-tour" id="gd-tourbar" hidden><span id="gd-step">Tour</span><div class="bar"><i id="gd-prog"></i></div><button id="gd-pause">Pause</button><button id="gd-stop">Stop</button></div>
  <div class="gd-chips" id="gd-chips"></div>
- <form class="gd-in" id="gd-form" autocomplete="off"><button type="button" class="mic" id="gd-mic" aria-label="Ask by voice" title="Ask by voice">🎙</button><input id="gd-q" placeholder="Ask Meera about the clubhouse…" aria-label="Your question"><button type="submit" aria-label="Send">➤</button></form>
- <div class="gd-note">Meera answers from the Konak clubhouse design brief.</div>
+ <form class="gd-in" id="gd-form" autocomplete="off"><button type="button" class="mic" id="gd-mic" aria-label="Ask by voice" title="Ask by voice">🎙</button><input id="gd-q" placeholder="Ask Harshitha about the clubhouse…" aria-label="Your question"><button type="submit" aria-label="Send">➤</button></form>
+ <div class="gd-note">Harshitha answers from the Konak clubhouse design brief.</div>
 </aside>
 
 <script>
@@ -1113,7 +1113,14 @@ const fab=$("#gd-fab"),gd=$("#gd"),log=$("#gd-log"),chips=$("#gd-chips");
 let voiceOn=true;try{voiceOn=localStorage.getItem("gd-voice")!=="off"}catch(e){}
 const synth=window.speechSynthesis;let VOICE=null;
 function pickVoice(){if(!synth)return;const vs=synth.getVoices();if(!vs.length)return;
- const pref=[v=>/en-IN/i.test(v.lang)&&/female|heera|veena|neerja|swara|kajal|aditi|raveena/i.test(v.name),v=>/en-IN/i.test(v.lang),v=>/en-GB/i.test(v.lang)&&/female|libby|sonia|serena|kate|martha|google uk english female/i.test(v.name),v=>/en/i.test(v.lang)&&/female|samantha|zira|aria|jenny|karen|moira|tessa|victoria/i.test(v.name),v=>/^en/i.test(v.lang)];
+ const soft=/neerja|swara|kajal|aditi|raveena|heera|veena|aria|jenny|ava|emma|sonia|libby|michelle|samantha|serena|moira|tessa|karen|google uk english female|female|zira/i;
+ const pref=[v=>/en-IN/i.test(v.lang)&&/neerja|swara|kajal|aditi|raveena|heera|veena|female/i.test(v.name)&&/natural|online|neural|premium|enhanced/i.test(v.name),
+  v=>/en-IN/i.test(v.lang)&&/neerja|swara|kajal|aditi|raveena|heera|veena|female/i.test(v.name),
+  v=>/^en/i.test(v.lang)&&/natural|online|neural|premium|enhanced/i.test(v.name)&&soft.test(v.name),
+  v=>/google uk english female/i.test(v.name),
+  v=>/^en/i.test(v.lang)&&/samantha|serena|moira|tessa|karen|sonia|libby/i.test(v.name),
+  v=>/^en/i.test(v.lang)&&soft.test(v.name),
+  v=>/^en/i.test(v.lang)];
  for(const f of pref){const v=vs.find(f);if(v){VOICE=v;break}}}
 if(synth){pickVoice();synth.onvoiceschanged=pickVoice}
 $("#gd-mute").textContent=voiceOn?"🔊":"🔇";
@@ -1127,8 +1134,8 @@ function say(text,done){
  synth.cancel();
  const parts=plain.match(/[^.!?]+[.!?]*/g)||[plain];let i=0;
  const next=()=>{if(i>=parts.length){talking(false);done&&done();return}
-  const u=new SpeechSynthesisUtterance(parts[i++].trim());if(VOICE)u.voice=VOICE;u.lang=VOICE?VOICE.lang:"en-IN";u.rate=.96;u.pitch=1.04;
-  u.onstart=()=>talking(true);u.onend=()=>{if(!stopped)next()};u.onerror=()=>{talking(false);if(!stopped)done&&done()};synth.speak(u)};
+  const u=new SpeechSynthesisUtterance(parts[i++].trim());if(VOICE)u.voice=VOICE;u.lang=VOICE?VOICE.lang:"en-IN";u.rate=.9;u.pitch=1.12;u.volume=.9;
+  u.onstart=()=>talking(true);u.onend=()=>{if(!stopped)setTimeout(()=>{if(!stopped)next()},260)};u.onerror=()=>{talking(false);if(!stopped)done&&done()};synth.speak(u)};
  stopped=false;next()}
 let stopped=false;
 function hush(){stopped=true;clearTimeout(say.t);if(synth)synth.cancel();talking(false)}
@@ -1144,7 +1151,7 @@ function reply(text,act){add("her",text,act);say(text)}
 
 /* --- knowledge --- */
 const KB=[
- {k:/\b(hi|hello|hey|namaste|namaskar|hai)\b/,a:"Namaste! I'm Meera. I can take you on a three-minute guided tour of the clubhouse, or answer anything about its design. What would you like to know?"},
+ {k:/\b(hi|hello|hey|namaste|namaskar|hai)\b/,a:"Namaste! I'm Harshitha. I can take you on a three-minute guided tour of the clubhouse, or answer anything about its design. What would you like to know?"},
  {k:/differ|special|unique|why konak|better|other club|compare|usp/,a:"Three things set Konak apart. First, there's a landscaped courtyard at its heart where other clubhouses have a reception lobby. Second, daylight comes in through the middle of the building, with double-height spaces. Third, it's built for daily life, with guest rooms, a salon, a grocery store and a first-aid room, not just weekend amenities.",go:"different",label:"See what's different"},
  {k:/\bsize\b|how big|\bsq\.? ?ft|square f|sft|built.?up|\barea\b|how large|\bfeet\b/,a:"The clubhouse is about 30,000 square feet over three floors, serving the 120 families of Konak."},
  {k:/floor|level|storey|story/,a:"There are three floors, each with its own mood. The ground floor is for unwinding, the first floor is for movement and celebration, and the second floor is for play and rest.",go:"floors",label:"Explore the floors"},
@@ -1175,7 +1182,7 @@ const KB=[
  {k:/park|car|lift|elevator|access|wheelchair/,a:"That's a good practical question. Please check the details with your Ankura Homes relationship manager so you get the confirmed answer."},
  {k:/photo|picture|image|render|gallery|view/,a:"You can browse every design view in the gallery, filtered by floor.",go:"gallery",label:"Open the gallery"},
  {k:/present|slideshow|show me|full ?screen/,a:"I'll start the full-screen presentation for you.",act:{label:"Start presentation",fn:()=>document.querySelector("#visit [data-present]").click()}},
- {k:/who are you|your name|are you real|human|robot|\bai\b/,a:"I'm Meera, a virtual host for the Konak clubhouse. I'm not a real person, but everything I tell you comes from the clubhouse design brief."},
+ {k:/who are you|your name|are you real|human|robot|\bai\b/,a:"I'm Harshitha, a virtual host for the Konak clubhouse. I'm not a real person, but everything I tell you comes from the clubhouse design brief."},
  {k:/thank|thanks|great|nice|lovely|beautiful|wow/,a:"Thank you! It really is a special place. Is there a space you'd like to see more of?"}
 ];
 const SUGG=["Take the tour","What makes it different?","Tell me about the courtyard","Is there a pool?","What's for kids?","Show the banquet hall","Guest rooms?","Where is it?"];
@@ -1196,7 +1203,7 @@ function ask(q){if(!q.trim())return;hush();add("me",q.replace(/</g,"&lt;"));
 
 /* --- guided tour --- */
 const TOUR=[
- ["Welcome",null,"Namaste, I'm Meera, your host at Konak. Let me walk you through the clubhouse. It takes about three minutes, and you can ask me anything along the way."],
+ ["Welcome",null,"Namaste, I'm Harshitha, your host at Konak. Let me walk you through the clubhouse. It takes about three minutes, and you can ask me anything along the way."],
  ["The idea","idea","Most clubhouses are a list of amenities. At Konak, the clubhouse is designed as a landscape you walk into. It's thirty thousand square feet over three floors, made for the hundred and twenty families of Konak."],
  ["The courtyard","heart","At its centre is something you won't find in other clubhouses: a garden. It's an indoor courtyard with a lawn for children, smooth boulders to sit on, a waterfall on a travertine wall, and a red ribbon sculpture floating through the full height of the building."],
  ["Why it's different","different","So what makes it different? It has a garden instead of a lobby, and daylight brought into the middle of the building. It has flowing, curved spaces instead of corridors, and art you live with. It has hotel-style guest rooms for visiting family, and a calm, rich palette that won't date."],
@@ -1224,7 +1231,7 @@ $("#gd-stop").onclick=()=>{endTour(false);add("her","Tour stopped. Ask me anythi
 /* --- open / close --- */
 let greeted=false;
 function open(){gd.classList.add("on");fab.classList.remove("show");
- if(!greeted){greeted=true;const t="Namaste! I'm Meera, your host at the Konak clubhouse. Shall I take you on a three-minute guided tour, or would you like to ask me something?";add("her",t,{label:"▶ Start the guided tour",fn:startTour});say(t);drawChips(SUGG)}
+ if(!greeted){greeted=true;const t="Namaste! I'm Harshitha, your host at the Konak clubhouse. Shall I take you on a three-minute guided tour, or would you like to ask me something?";add("her",t,{label:"▶ Start the guided tour",fn:startTour});say(t);drawChips(SUGG)}
  setTimeout(()=>$("#gd-q").focus({preventScroll:true}),300)}
 function close(){gd.classList.remove("on");hush();T.on=false;$("#gd-tourbar").hidden=true;showFab()}
 fab.onclick=open;$("#gd-x").onclick=close;
