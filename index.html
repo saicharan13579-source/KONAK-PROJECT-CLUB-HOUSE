@@ -1245,9 +1245,14 @@ $$(".moment").forEach(m=>dob.observe(m));
 /* ---------- gallery ---------- */
 const ALL=SPACES.flatMap(s=>s.r.map(n=>({n,t:s.n,d:s.d,c:FL[s.f],f:s.f}))).sort((a,b)=>a.n-b.n);
 let GF="all",GLIST=ALL;
+let GALL=false;const GMAX=()=>innerWidth>=1700?15:innerWidth<=640?8:12;
 function drawGal(){GLIST=ALL.filter(x=>GF==="all"||x.f===GF);$$("#gal-ctl button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===GF));
- $("#gal").innerHTML=GLIST.map((x,i)=>`<button data-i="${i}"><img src="${th(x.n)}" alt="${x.t}" loading="lazy"><span>${x.t} · ${x.c}</span></button>`).join("")}
-$("#gal-ctl").onclick=e=>{const b=e.target.closest("button");if(b){GF=b.dataset.f;drawGal()}};
+ const show=GALL?GLIST:GLIST.slice(0,GMAX());
+ $("#gal").innerHTML=show.map((x,i)=>`<button data-i="${i}"><img src="${th(x.n)}" alt="${x.t}" loading="lazy"><span>${x.t} · ${x.c}</span></button>`).join("");
+ let m=document.getElementById("gal-more");if(!m){m=document.createElement("div");m.id="gal-more";m.className="gal-more";$("#gal").after(m)}
+ const left=GLIST.length-show.length;m.innerHTML=left>0?`<button class="btn" type="button">Show all ${GLIST.length} views ↓</button>`:(GALL&&GLIST.length>GMAX()?`<button class="btn" type="button">Show fewer ↑</button>`:"");
+ const b=m.querySelector("button");if(b)b.onclick=()=>{GALL=!GALL;drawGal();if(!GALL)document.getElementById("gallery").scrollIntoView({behavior:"smooth"})}}
+$("#gal-ctl").onclick=e=>{const b=e.target.closest("button");if(b){GF=b.dataset.f;GALL=false;drawGal()}};
 $("#gal").onclick=e=>{const b=e.target.closest("button");if(b)openLB(GLIST,+b.dataset.i)};
 drawGal();
 
@@ -1869,6 +1874,47 @@ footer{background:var(--esp);border-top:1px solid rgba(226,192,138,.18)}
 .gt-room img:not(.bg){object-fit:contain}
 .step .mob{aspect-ratio:16/9!important}
 @media (max-width:1100px){.heart{grid-template-columns:1.15fr 1fr}}
+
+
+/* ===== balanced sizes ===== */
+.pad{padding:clamp(64px,8vw,124px) 0}
+#gallery.pad{padding-top:0}
+.statement{font-size:clamp(28px,3.1vw,46px)}
+.floor-intro h3{font-size:clamp(34px,3.6vw,54px)}
+.floor-intro{margin-top:36px}
+.step{min-height:82svh}
+.step h3{font-size:clamp(30px,3vw,46px)}
+.facts{margin-top:clamp(44px,6vw,76px)}
+.facts strong{font-size:clamp(40px,4.4vw,64px)}
+.pillars{margin-top:clamp(40px,5vw,70px)}
+.pillar{aspect-ratio:3/4}
+.diff{margin-top:clamp(36px,4.5vw,60px)}
+.dcard img{aspect-ratio:16/9}
+.dcard h3{font-size:clamp(24px,2vw,30px)}
+.rail{grid-auto-columns:clamp(260px,26vw,380px)}
+.space .ph{aspect-ratio:4/4.4}
+/* a day: two-column story beside the sticky clock */
+.moments{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,3vw,44px) clamp(20px,2.4vw,34px)}
+.moment:nth-child(even){transform:translateY(clamp(40px,6vw,90px))}
+.moment img{aspect-ratio:4/3}
+.moment h4{font-size:clamp(22px,1.9vw,28px);margin-top:14px}
+.moment p{font-size:15px}
+.day{grid-template-columns:.7fr 1.3fr;margin-bottom:clamp(40px,6vw,90px)}
+@media (max-width:860px){.moments{grid-template-columns:1fr}.moment:nth-child(even){transform:none}.day{grid-template-columns:1fr}}
+/* gallery: tidy grid with "show all" */
+.gal{columns:auto!important;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.gal button{margin:0}
+.gal img{aspect-ratio:16/10}
+@media (min-width:1700px){.gal{grid-template-columns:repeat(5,1fr)}}
+@media (max-width:980px){.gal{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.gal{grid-template-columns:repeat(2,1fr);gap:8px}}
+.gal-more{display:flex;justify-content:center;margin-top:28px}
+.gal-more .btn{color:var(--ink);border-color:var(--line)}
+.gal-more .btn:hover{background:var(--ink);color:var(--gold-hi)}
+.gens{margin-top:clamp(36px,5vw,60px)}
+.mats{margin-top:clamp(36px,5vw,60px)}
+.quote{margin-top:clamp(56px,7vw,96px);font-size:clamp(26px,3vw,44px)}
+.close{min-height:88svh}
 
 /* ===== every screen size ===== */
 /* big monitors: scale the whole page up proportionally (the landing scales itself) */
