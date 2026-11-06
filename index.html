@@ -1885,7 +1885,7 @@ footer{background:var(--esp);border-top:1px solid rgba(226,192,138,.18)}
 .lb,.pres,.drawer{height:calc(100svh / var(--z));width:calc(100vw / var(--z));right:auto;bottom:auto}
 .gd{height:min(640px,calc((100svh - 110px) / var(--z)))}
 /* courtyard renders: whole image, sized to the panel, clear of the top menu */
-.heart-media img:not(.bg){inset:calc(64px / var(--z)) 3% 3%;width:94%;height:auto;max-height:calc(100% - 64px / var(--z) - 3%);margin:auto;object-fit:contain}
+.heart-media img:not(.bg){inset:calc(64px / var(--z)) 0 0 0;margin:auto;width:min(92%,calc((100svh / var(--z) - 64px / var(--z) - 7svh) * 4 / 3));height:auto;max-height:none;aspect-ratio:4/3;object-fit:cover;object-position:50% 50%;border-radius:4px}
 
 /* ===== balanced sizes ===== */
 .pad{padding:clamp(64px,8vw,124px) 0}
