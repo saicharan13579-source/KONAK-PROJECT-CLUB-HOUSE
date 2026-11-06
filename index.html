@@ -1134,7 +1134,7 @@ function say(text,done){
  synth.cancel();
  const parts=plain.match(/[^.!?]+[.!?]*/g)||[plain];let i=0;
  const next=()=>{if(i>=parts.length){talking(false);done&&done();return}
-  const u=new SpeechSynthesisUtterance(parts[i++].trim());if(VOICE)u.voice=VOICE;u.lang=VOICE?VOICE.lang:"en-IN";u.rate=.9;u.pitch=1.12;u.volume=.9;
+  const u=new SpeechSynthesisUtterance(parts[i++].trim());if(VOICE)u.voice=VOICE;u.lang=VOICE?VOICE.lang:"en-IN";const q=/\?\s*$/.test(u.text);u.rate=.86+Math.random()*.06;u.pitch=(q?1.18:1.08)+Math.random()*.06;u.volume=.92;
   u.onstart=()=>talking(true);u.onend=()=>{if(!stopped)setTimeout(()=>{if(!stopped)next()},260)};u.onerror=()=>{talking(false);if(!stopped)done&&done()};synth.speak(u)};
  stopped=false;next()}
 let stopped=false;
@@ -1147,43 +1147,46 @@ function add(who,html,act){const d=document.createElement("div");d.className="gd
 const go=id=>{const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:"smooth",block:"start"})};
 const floor=f=>{go("floors");setTimeout(()=>{const b=document.querySelector(`.ftab[data-f="${f}"]`);b&&b.click()},500)};
 const viewSpace=name=>{const s=SPACES.find(x=>x.n===name);if(s&&s.r.length)openLB(s.r.map(n=>({n,t:s.n,d:s.d,c:FL[s.f]})),0)};
-function reply(text,act){add("her",text,act);say(text)}
+const OPEN=["",""," ","Oh, lovely question! ","Ah, yes! ","Let me tell you. ","Of course! "];
+function reply(text,act,noOpen){let tx=text;if(!noOpen&&!/^(Oh|Ah|Yes|Hello|Aww|Isn't|You're|That's|Good|Sure|Of course|Let me|It was|I'm)/.test(tx)&&Math.random()<.55)tx=OPEN[Math.floor(Math.random()*OPEN.length)].trim()+(tx?" ":"")+tx;add("her",tx.trim(),act);say(tx.trim())}
+function hello(){const h=new Date(Date.now()+(330+new Date().getTimezoneOffset())*60000).getHours();return h<12?"Good morning":h<17?"Good afternoon":"Good evening"}
 
 /* --- knowledge --- */
 const KB=[
- {k:/\b(hi|hello|hey|namaste|namaskar|hai)\b/,a:"Namaste! I'm Harshitha. I can take you on a three-minute guided tour of the clubhouse, or answer anything about its design. What would you like to know?"},
- {k:/differ|special|unique|why konak|better|other club|compare|usp/,a:"Three things set Konak apart. First, there's a landscaped courtyard at its heart where other clubhouses have a reception lobby. Second, daylight comes in through the middle of the building, with double-height spaces. Third, it's built for daily life, with guest rooms, a salon, a grocery store and a first-aid room, not just weekend amenities.",go:"different",label:"See what's different"},
- {k:/\bsize\b|how big|\bsq\.? ?ft|square f|sft|built.?up|\barea\b|how large|\bfeet\b/,a:"The clubhouse is about 30,000 square feet over three floors, serving the 120 families of Konak."},
- {k:/floor|level|storey|story/,a:"There are three floors, each with its own mood. The ground floor is for unwinding, the first floor is for movement and celebration, and the second floor is for play and rest.",go:"floors",label:"Explore the floors"},
- {k:/courtyard|garden|forest|lawn|waterfall|water|boulder|green|nature|plant/,a:"The courtyard is the heart of Konak. It's an indoor garden with a soft lawn for children, smooth white boulders to sit and climb on, ferns and palms, and a shallow waterfall running down a travertine wall. It's lit from above.",go:"heart",label:"Show the courtyard"},
- {k:/ribbon|sculpture|red|art|artwork/,a:"The red ribbon sculpture floats through the full height of the courtyard. It's the signature art piece of the clubhouse, and you can see it from the lounges, the stair and the first-floor lobby. Art pieces throughout the building add colour and start conversations.",space:"The courtyard"},
- {k:/pool|swim/,a:"The swimming pool sits under a louvred timber ceiling, with matte stone, a lounger deck and a row of tall trees beyond. There's also a gallery lounge where grandparents can watch the little ones swim.",space:"Swimming pool & deck"},
- {k:/gym|fitness|workout|exercise|cardio|weights/,a:"The fitness centre on the first floor has cardio, strength and functional training zones under a sculpted ceiling of light. It's a full gym, right at home.",space:"Fitness centre"},
- {k:/yoga|dance|studio|zumba|aerobic|class/,a:"The studio is bright and open, with daylight on two sides. It's for yoga, dance, Zumba and group classes.",space:"Studio"},
- {k:/badminton|shuttle/,a:"The badminton court is double-height, with a professional sports floor and gallery seating, so families can cheer from the side.",space:"Badminton court"},
- {k:/squash/,a:"The squash court is double-height and competition-style, with high-impact walls and proper sports lighting.",space:"Squash court"},
- {k:/sport|game|play|snooker|pool table|billiard|table tennis|carrom|chess/,a:"For sport there's badminton, squash and the pool. The indoor games room on the second floor has snooker, table tennis and carrom, with lounge seating in between. It's where teenagers and grandparents end up playing together.",space:"Indoor games"},
- {k:/theatre|theater|movie|cinema|film|screen/,a:"The home theatre on the second floor seats 27 in reclining chairs, with acoustic panelling, a large screen and a snack counter. It's perfect for premieres, cricket finals and family movie nights.",space:"Home theatre"},
- {k:/banquet|party|celebrat|function|wedding|birthday|event|hall|stage|festival/,a:"The banquet hall is on the first floor. It has fabric and brass panelling, a signature chandelier ceiling, a stage and a double-height volume. Birthdays, anniversaries and festivals can all be hosted right at home.",space:"Banquet hall & stage"},
- {k:/guest|stay|room|relative|visitor|hotel|sleep/,a:"There are hotel-style guest rooms on the second floor, with upholstered bed walls, warm lighting and private bathrooms. When family visits, there's a room for them.",space:"Guest rooms"},
- {k:/work|office|meeting|conference|co-?work|laptop|business/,a:"There's a daylit conference room with a glowing stretch ceiling and space to work beside it. You can take the big call, then go for a swim.",space:"Conference & co-working"},
- {k:/salon|hair|spa|beauty|grooming/,a:"There's a salon on the ground floor, with mirror stations facing the windows behind a slatted timber screen. You can get a haircut without leaving home.",space:"Salon"},
- {k:/grocery|shop|store|milk|essential|market/,a:"A grocery store on the ground floor is styled like a neighbourhood deli, with timber ceiling slats and island shelving. Daily essentials are a two-minute walk away.",space:"Grocery store"},
- {k:/doctor|medical|first.?aid|health|clinic|emergency/,a:"There's a first-aid and consultation room on the ground floor. It's calm and softly coloured, with a curtained patient bay, for peace of mind at every age.",space:"First aid & consultation"},
- {k:/lounge|sit|relax|cafe|coffee|reception|lobby|arrival/,a:"The arrival lounges have organic sofas gathered around planter islands, under warm pendant lights. It's like a living room for the whole community.",space:"Arrival lounges"},
- {k:/kid|child|children|toddler|son|daughter/,a:"Children get the indoor lawn and climbing boulders, the pool, the badminton court and the games room. Parents can watch them from the lounges nearby.",go:"family",label:"For every generation"},
- {k:/elder|senior|parent|grand|old age|aged/,a:"For grandparents there are quiet lounges, the pool gallery, yoga and studio sessions, and a first-aid room close at hand. The guest rooms are ready for visiting family too.",go:"family",label:"For every generation"},
- {k:/material|finish|stone|marble|wood|timber|metal|brass|plaster|palette|colou?r/,a:"The palette is deliberately calm: stone, plaster, wood, metal and greenery. It feels rich without being loud, and it's chosen to age well. As the design team puts it, materials age, finishes evolve, stories remain.",go:"materials",label:"See the materials"},
- {k:/light|lighting|chandelier|daylight|bright/,a:"Lighting is layered. Daylight comes in from above through the courtyard, with warm cove lighting, sculptural pendants and accent lights for the art. The banquet hall has a signature chandelier ceiling."},
- {k:/day|routine|daily|morning|evening|life/,a:"A typical day might begin with sunrise laps and yoga, then a meeting in the conference room, errands at the grocery store and salon, kids on the lawn at four-thirty, badminton at six, a celebration at eight and a movie at ten.",go:"day",label:"A day at Konak"},
- {k:/where|location|address|map|direction|reach|konapur|chimaldari/,a:"Konak is at Chimaldari Konapur, Hyderabad, Telangana. I can open the map for you.",act:{label:"Open the map",fn:()=>window.open("https://maps.app.goo.gl/iSK5qghKauq3zsXy5","_blank","noopener")}},
- {k:/price|cost|rate|budget|emi|loan|book|booking|availab|plot|villa|mansion|buy|purchase|offer/,a:"For prices, availability and bookings, please speak to your Ankura Homes relationship manager. They can also arrange a site visit to see the clubhouse in person."},
- {k:/when|ready|complet|possession|handover|timeline|open/,a:"For the latest on completion and handover, please check with your Ankura Homes relationship manager. They'll have the current schedule."},
- {k:/park|car|lift|elevator|access|wheelchair/,a:"That's a good practical question. Please check the details with your Ankura Homes relationship manager so you get the confirmed answer."},
- {k:/photo|picture|image|render|gallery|view/,a:"You can browse every design view in the gallery, filtered by floor.",go:"gallery",label:"Open the gallery"},
- {k:/present|slideshow|show me|full ?screen/,a:"I'll start the full-screen presentation for you.",act:{label:"Start presentation",fn:()=>document.querySelector("#visit [data-present]").click()}},
- {k:/who are you|your name|are you real|human|robot|\bai\b/,a:"I'm Harshitha, a virtual host for the Konak clubhouse. I'm not a real person, but everything I tell you comes from the clubhouse design brief."},
- {k:/thank|thanks|great|nice|lovely|beautiful|wow/,a:"Thank you! It really is a special place. Is there a space you'd like to see more of?"}
+ {k:/\b(hi|hello|hey|namaste|namaskar|hai|good (morning|afternoon|evening))\b/,a:"Hello! It's so lovely to meet you. I'm Harshitha. I can walk you through the whole clubhouse in about three minutes, or you can just ask me whatever you're curious about. What would you like?",n:1},
+ {k:/differ|special|unique|why konak|better|other club|compare|usp/,a:"Oh, this is my favourite question! You know how most clubhouses open into a reception lobby? Here, you walk straight into a garden. Daylight pours in through the middle of the building, the spaces flow into each other with soft curves, and it's made for everyday life, with guest rooms for your family, a salon, even a little grocery store. It honestly feels like an extension of your home.",go:"different",label:"See what's different"},
+ {k:/\bsize\b|how big|\bsq\.? ?ft|square f|sft|built.?up|\barea\b|how large|\bfeet\b/,a:"It's about thirty thousand square feet, spread over three floors, and it's all just for the hundred and twenty families of Konak. So it never feels crowded."},
+ {k:/floor|level|storey|story/,a:"There are three floors, and each one has its own little personality. The ground floor is for slowing down and unwinding. The first floor is where you move, play and celebrate. And the second floor is for fun and rest. Shall I show you?",go:"floors",label:"Explore the floors"},
+ {k:/courtyard|garden|forest|lawn|waterfall|water|boulder|green|nature|plant/,a:"Ah, the courtyard! This is the heart of Konak. Imagine a soft lawn indoors, smooth white boulders the children love to climb, ferns and palms all around, and a gentle waterfall running down a stone wall, all lit by daylight from above. It's so peaceful, you'll want to sit there with your morning tea.",go:"heart",label:"Show the courtyard"},
+ {k:/ribbon|sculpture|red|art|artwork/,a:"Isn't it beautiful? That red ribbon sculpture floats through the full height of the courtyard. You'll catch glimpses of it from the lounges, the staircase and the first floor. It's the kind of piece that makes people stop and smile.",space:"The courtyard"},
+ {k:/pool|swim/,a:"Yes, and it's lovely! The pool sits under a warm timber ceiling, with a sun deck and a row of tall trees beyond. There's even a little gallery lounge where grandparents can sit comfortably and watch the kids splash around.",space:"Swimming pool & deck"},
+ {k:/gym|fitness|workout|exercise|cardio|weights/,a:"The fitness centre is on the first floor, with cardio, strength and functional training zones under a beautiful sculpted ceiling of light. No more driving to a gym. It's right downstairs.",space:"Fitness centre"},
+ {k:/yoga|dance|studio|zumba|aerobic|class/,a:"The studio is one of the brightest rooms in the building, with daylight on two sides. It's perfect for sunrise yoga, Zumba with friends, or the kids' dance class.",space:"Studio"},
+ {k:/badminton|shuttle/,a:"There's a proper double-height badminton court with a professional sports floor, and gallery seating along the side, so the whole family can cheer. Weekend tournaments are going to be so much fun.",space:"Badminton court"},
+ {k:/squash/,a:"Oh, the squash court is a real one: double-height and competition-style, with proper walls and sports lighting. Quick, energetic, and just a few steps away.",space:"Squash court"},
+ {k:/sport|game|play|snooker|pool table|billiard|table tennis|carrom|chess/,a:"There's plenty! Badminton, squash and the pool, and upstairs a games room with snooker, table tennis and carrom. Honestly, that's where you'll find teenagers and grandparents playing together.",space:"Indoor games"},
+ {k:/theatre|theater|movie|cinema|film|screen/,a:"You're going to love this. There's a home theatre on the second floor with twenty-seven cosy recliners, a big screen and a little snack counter. Picture family movie nights, or watching a cricket final together.",space:"Home theatre"},
+ {k:/banquet|party|celebrat|function|wedding|birthday|event|hall|stage|festival/,a:"The banquet hall is just stunning. It has soft fabric and brass panels, a chandelier ceiling that sparkles, and its own stage. Birthdays, anniversaries, festivals, you can celebrate them all right here at home, with your neighbours around you.",space:"Banquet hall & stage"},
+ {k:/guest|stay|room|relative|visitor|hotel|sleep/,a:"Yes! There are hotel-style guest rooms upstairs, warm and calm, each with its own bathroom. So when your parents or cousins come to visit, there's always a lovely room waiting for them.",space:"Guest rooms"},
+ {k:/work|office|meeting|conference|co-?work|laptop|business/,a:"There's a bright conference room with a glowing ceiling, and space to work beside it. Take your important call in the morning, then go for a swim at lunch. Not bad, right?",space:"Conference & co-working"},
+ {k:/salon|hair|spa|beauty|grooming/,a:"There's a salon on the ground floor, all soft light and wooden screens, with the chairs facing the windows. A haircut, without even leaving home.",space:"Salon"},
+ {k:/grocery|shop|store|milk|essential|market/,a:"Yes, a little grocery store, styled like a neighbourhood deli. Forgot the milk or the curry leaves? It's a two-minute walk.",space:"Grocery store"},
+ {k:/doctor|medical|first.?aid|health|clinic|emergency/,a:"There's a calm first-aid and consultation room on the ground floor. It gives so much peace of mind, especially for families with little ones and elders.",space:"First aid & consultation"},
+ {k:/lounge|sit|relax|cafe|coffee|reception|lobby|arrival/,a:"The arrival lounges feel like a big, beautiful living room for the whole community, with soft curved sofas around planter islands and warm pendant lights. It's where you'll bump into friends over coffee.",space:"Arrival lounges"},
+ {k:/kid|child|children|toddler|son|daughter/,a:"The children are going to be so happy here! There's the indoor lawn and the boulders to climb, the pool, the badminton court and the games room. And parents can relax in the lounges close by, keeping an eye on them.",go:"family",label:"For every generation"},
+ {k:/elder|senior|parent|grand|old age|aged/,a:"We thought about grandparents a lot. There are quiet lounges, the pool gallery, gentle yoga in the studio, and a first-aid room close at hand. It's a place where they can feel part of everything.",go:"family",label:"For every generation"},
+ {k:/material|finish|stone|marble|wood|timber|metal|brass|plaster|palette|colou?r/,a:"The palette is calm and natural: stone, plaster, wood, metal and lots of greenery. It feels rich, but never loud. I love the line the designers use: materials age, finishes evolve, stories remain.",go:"materials",label:"See the materials"},
+ {k:/light|lighting|chandelier|daylight|bright/,a:"The lighting is really thoughtful. There's daylight from above in the courtyard, warm glowing coves, sculptural pendant lights, and soft accent lights on the art. And in the banquet hall, a chandelier ceiling that just sparkles."},
+ {k:/\bday\b|routine|daily|morning|evening|\blife\b/,a:"Let me paint a picture. You start with a sunrise swim and some yoga. You take a meeting in the conference room and pick up groceries downstairs. In the evening the kids are on the lawn, there's a game of badminton, and maybe a celebration in the banquet hall. Then a movie to end the day. That's life at Konak.",go:"day",label:"A day at Konak"},
+ {k:/where|location|address|map|direction|reach|konapur|chimaldari/,a:"Konak is at Chimaldari Konapur, in Hyderabad, Telangana. Let me open the map for you.",act:{label:"Open the map",fn:()=>window.open("https://maps.app.goo.gl/iSK5qghKauq3zsXy5","_blank","noopener")},n:1},
+ {k:/price|cost|rate|budget|emi|loan|book|booking|availab|plot|villa|mansion|buy|purchase|offer/,a:"That's a really important question, and I'd love for you to get the exact details. Your Ankura Homes relationship manager can walk you through prices and availability, and they can arrange a site visit too, so you can feel the space in person.",n:1},
+ {k:/when|ready|complet|possession|handover|timeline|\bopen\b/,a:"Good question. For the latest on completion and handover, please check with your Ankura Homes relationship manager. They'll have the most up-to-date schedule for you.",n:1},
+ {k:/park|car|lift|elevator|access|wheelchair/,a:"That's a very practical question, and I don't want to guess. Please check it with your Ankura Homes relationship manager so you get the confirmed answer.",n:1},
+ {k:/photo|picture|image|render|gallery|view/,a:"Of course! Every view of every space is in the gallery. You can filter it by floor and take your time.",go:"gallery",label:"Open the gallery"},
+ {k:/present|slideshow|show me|full ?screen/,a:"Sure, let me start the full-screen presentation for you. Sit back and enjoy!",act:{label:"Start presentation",fn:()=>document.querySelector("#visit [data-present]").click()},n:1},
+ {k:/who are you|your name|are you real|human|robot|\bai\b/,a:"I'm Harshitha, your virtual host for the Konak clubhouse. I'm not a real person, but I know this clubhouse inside out, because everything I share comes straight from its design brief.",n:1},
+ {k:/thank|thanks|great|nice|lovely|beautiful|wow|awesome|amazing/,a:"Aww, thank you! I really do think it's a special place. Is there a space you'd like to see a little more of?",n:1},
+ {k:/\b(bye|goodbye|see you|ok bye)\b/,a:"It was so lovely talking with you! I hope we see you at Konak soon. Take care.",n:1}
 ];
 const SUGG=["Take the tour","What makes it different?","Tell me about the courtyard","Is there a pool?","What's for kids?","Show the banquet hall","Guest rooms?","Where is it?"];
 function drawChips(list){chips.innerHTML="";list.forEach(t=>{const b=document.createElement("button");b.type="button";b.textContent=t;b.onclick=()=>ask(t);chips.appendChild(b)})}
@@ -1196,25 +1199,25 @@ function ask(q){if(!q.trim())return;hush();add("me",q.replace(/</g,"&lt;"));
   if(hit){let act=hit.act||null;
    if(hit.space)act={label:"See the "+hit.space.toLowerCase(),fn:()=>viewSpace(hit.space)};
    else if(hit.go)act={label:hit.label||"Show me",fn:()=>go(hit.go)};
-   reply(hit.a,act);if(hit.go&&!hit.space)go(hit.go)}
+   reply(hit.a,act,hit.n);if(hit.go&&!hit.space)go(hit.go)}
   else if(sp)reply(`${sp.n}: ${sp.d} ${sp.l}`,{label:"See the views",fn:()=>viewSpace(sp.n)});
-  else reply("That's a good question for our sales team, and your Ankura Homes relationship manager can confirm it. Meanwhile, I can tell you about the courtyard, the pool, sports, the banquet hall, the theatre, the guest rooms or the materials.");
+  else reply("Hmm, that one's best answered by our sales team, so I don't give you the wrong information. Your Ankura Homes relationship manager will happily help. Meanwhile, I'd love to tell you about the courtyard, the pool, the banquet hall, the theatre or the guest rooms. Which one sounds nice?",null,1);
  },350)}
 
 /* --- guided tour --- */
 const TOUR=[
- ["Welcome",null,"Namaste, I'm Harshitha, your host at Konak. Let me walk you through the clubhouse. It takes about three minutes, and you can ask me anything along the way."],
- ["The idea","idea","Most clubhouses are a list of amenities. At Konak, the clubhouse is designed as a landscape you walk into. It's thirty thousand square feet over three floors, made for the hundred and twenty families of Konak."],
- ["The courtyard","heart","At its centre is something you won't find in other clubhouses: a garden. It's an indoor courtyard with a lawn for children, smooth boulders to sit on, a waterfall on a travertine wall, and a red ribbon sculpture floating through the full height of the building."],
- ["Why it's different","different","So what makes it different? It has a garden instead of a lobby, and daylight brought into the middle of the building. It has flowing, curved spaces instead of corridors, and art you live with. It has hotel-style guest rooms for visiting family, and a calm, rich palette that won't date."],
- ["Ground floor","GF","The ground floor is for unwinding. It has the arrival lounges, the courtyard, the swimming pool under its timber canopy, a badminton court, a salon, a grocery store and a first-aid room."],
- ["First floor","FF","The first floor is for movement and celebration. It has a fitness centre, a yoga and dance studio, a squash court, a conference room for working close to home, and the banquet hall with its own stage."],
- ["Second floor","SF","The second floor is for play and rest. It has a home theatre for twenty-seven, an indoor games room, and hotel-style guest rooms."],
- ["A day here","day","Imagine a day here. It starts with sunrise laps and yoga in the studio. Then a meeting in the conference room, and errands done downstairs. Children play on the indoor lawn, there's badminton in the evening and a celebration in the banquet hall, and the day ends with a movie night."],
- ["Every generation","family","It's designed for every generation, from toddlers to grandparents, so the whole family has a reason to come down every day."],
- ["Materials","materials","The finishes are deliberately calm: stone, plaster, wood, metal and greenery. Materials age. Finishes evolve. Stories remain."],
- ["Gallery","gallery","Every view of every space is here in the gallery, so you can explore at your own pace."],
- ["Life, unfolded","visit","That's the Konak clubhouse. Life, unfolded. Ask me anything, or speak to our team to arrange a site visit."]
+ ["Welcome",null,"Hello, and welcome to Konak! I'm Harshitha. Come, let me show you around the clubhouse. It'll only take about three minutes, and please, stop me anytime with a question."],
+ ["The idea","idea","So, most clubhouses are really just a list of amenities, aren't they? At Konak, it's different. The clubhouse is designed like a landscape that you walk into. It's around thirty thousand square feet, over three floors, made for the hundred and twenty families who live here."],
+ ["The courtyard","heart","And this, this is my favourite part. Right at the centre, there's a garden. A soft lawn indoors, smooth boulders the children love, a gentle waterfall on a stone wall, and that beautiful red ribbon sculpture floating all the way up. Can you picture sitting here with your morning tea?"],
+ ["Why it's different","different","So what really makes it different? You walk into a garden, not a lobby. Daylight flows into the middle of the building. The spaces curve and open into each other, with art you actually live with. There are guest rooms for your visiting family. And the whole palette is calm, warm and timeless."],
+ ["Ground floor","GF","Let's go floor by floor. The ground floor is all about slowing down. There are the arrival lounges, the courtyard, a lovely pool under a timber canopy, a badminton court, and even a salon, a grocery store and a first-aid room."],
+ ["First floor","FF","Upstairs, the first floor has a lot more energy. A fitness centre, a bright yoga and dance studio, a squash court, a conference room for working close to home, and the banquet hall, with its own stage, for all your celebrations."],
+ ["Second floor","SF","And on the second floor, it's time to play and rest. There's a home theatre with twenty-seven cosy recliners, an indoor games room, and hotel-style guest rooms for when family comes to stay."],
+ ["A day here","day","Now, imagine a whole day here. A sunrise swim, yoga in the studio, a meeting before lunch, errands done downstairs. Children laughing on the lawn in the evening, a game of badminton, a family celebration, and then a movie night. All just a short walk from your front door."],
+ ["Every generation","family","And the best part? It's made for everyone, from your little ones to your parents. Every generation has a reason to come down, every single day."],
+ ["Materials","materials","Everything is finished in calm, natural materials: stone, plaster, wood, metal and greenery. Rich, but never loud. As the designers say, materials age, finishes evolve, stories remain."],
+ ["Gallery","gallery","If you'd like to explore on your own, every view of every space is right here in the gallery."],
+ ["Life, unfolded","visit","And that's the Konak clubhouse. Life, unfolded. Thank you so much for walking through it with me. Ask me anything you like, or let our team arrange a site visit. I'd love for you to see it in person."]
 ];
 let T={i:-1,on:false,paused:false};
 function tourStep(i){T.i=i;if(i>=TOUR.length){endTour(true);return}
@@ -1226,12 +1229,12 @@ function tourStep(i){T.i=i;if(i>=TOUR.length){endTour(true);return}
 function startTour(){hush();T={i:-1,on:true,paused:false};$("#gd-tourbar").hidden=false;$("#gd-pause").textContent="Pause";tourStep(0)}
 function endTour(done){T.on=false;hush();$("#gd-tourbar").hidden=true;if(done)drawChips(["What makes it different?","Tell me about the courtyard","Show the banquet hall","What's for kids?","Where is it?"])}
 $("#gd-pause").onclick=()=>{if(!T.on)return;T.paused=!T.paused;$("#gd-pause").textContent=T.paused?"Resume":"Pause";if(T.paused)hush();else tourStep(T.i+1)};
-$("#gd-stop").onclick=()=>{endTour(false);add("her","Tour stopped. Ask me anything, or tap a topic below.")};
+$("#gd-stop").onclick=()=>{endTour(false);reply("No problem at all! Ask me anything you like, or just tap a topic below.",null,1)};
 
 /* --- open / close --- */
 let greeted=false;
 function open(){gd.classList.add("on");fab.classList.remove("show");
- if(!greeted){greeted=true;const t="Namaste! I'm Harshitha, your host at the Konak clubhouse. Shall I take you on a three-minute guided tour, or would you like to ask me something?";add("her",t,{label:"▶ Start the guided tour",fn:startTour});say(t);drawChips(SUGG)}
+ if(!greeted){greeted=true;const t=`${hello()}, and welcome to Konak! I'm Harshitha. It's so nice to have you here. Shall I take you on a little three-minute tour of the clubhouse, or would you like to ask me something first?`;add("her",t,{label:"▶ Start the guided tour",fn:startTour});say(t);drawChips(SUGG)}
  setTimeout(()=>$("#gd-q").focus({preventScroll:true}),300)}
 function close(){gd.classList.remove("on");hush();T.on=false;$("#gd-tourbar").hidden=true;showFab()}
 fab.onclick=open;$("#gd-x").onclick=close;
