@@ -1876,6 +1876,17 @@ footer{background:var(--esp);border-top:1px solid rgba(226,192,138,.18)}
 @media (max-width:1100px){.heart{grid-template-columns:1.15fr 1fr}}
 
 
+
+/* full-height panels use the real screen height even when the page is scaled up */
+:root{--z:1}
+.heart-media{height:calc(100svh / var(--z));top:0}
+.step{min-height:calc(82svh / var(--z))}
+.close{min-height:calc(88svh / var(--z))}
+.lb,.pres,.drawer{height:calc(100svh / var(--z));width:calc(100vw / var(--z));right:auto;bottom:auto}
+.gd{height:min(640px,calc((100svh - 110px) / var(--z)))}
+/* courtyard renders: whole image, sized to the panel, clear of the top menu */
+.heart-media img:not(.bg){inset:calc(64px / var(--z)) 3% 3%;width:94%;height:auto;max-height:calc(100% - 64px / var(--z) - 3%);margin:auto;object-fit:contain}
+
 /* ===== balanced sizes ===== */
 .pad{padding:clamp(64px,8vw,124px) 0}
 #gallery.pad{padding-top:0}
@@ -1918,12 +1929,10 @@ footer{background:var(--esp);border-top:1px solid rgba(226,192,138,.18)}
 
 /* ===== every screen size ===== */
 /* big monitors: scale the whole page up proportionally (the landing scales itself) */
-@media (min-width:1880px) and (min-height:980px){body>section:not(#intro),footer,.nav,.drawer,.gd,.gd-fab,.gd-teaser,.lb,.pres{zoom:1.18}}
-@media (min-width:2300px) and (min-height:1250px){body>section:not(#intro),footer,.nav,.drawer,.gd,.gd-fab,.gd-teaser,.lb,.pres{zoom:1.42}}
-@media (min-width:3000px) and (min-height:1700px){body>section:not(#intro),footer,.nav,.drawer,.gd,.gd-fab,.gd-teaser,.lb,.pres{zoom:1.85}}
-@media (min-width:3000px) and (max-height:1699px) and (min-height:1250px){body>section:not(#intro),footer,.nav,.drawer,.gd,.gd-fab,.gd-teaser,.lb,.pres{zoom:1.42}}
-@media (min-width:1880px) and (min-height:1250px){.gt{zoom:1.25}}
-@media (min-width:3000px) and (min-height:1700px){.gt{zoom:1.7}}
+@media (min-width:1880px) and (min-height:980px){:root{--z:1.18}body>section:not(#intro),footer,.nav,.drawer,.gd,.gd-fab,.gd-teaser,.lb,.pres{zoom:1.18}}
+@media (min-width:2300px) and (min-height:1250px){:root{--z:1.42}body>section:not(#intro),footer,.nav,.drawer,.gd,.gd-fab,.gd-teaser,.lb,.pres{zoom:1.42}}
+@media (min-width:3000px) and (min-height:1700px){:root{--z:1.85}body>section:not(#intro),footer,.nav,.drawer,.gd,.gd-fab,.gd-teaser,.lb,.pres{zoom:1.85}}
+@media (min-width:3000px) and (max-height:1699px) and (min-height:1250px){:root{--z:1.42}body>section:not(#intro),footer,.nav,.drawer,.gd,.gd-fab,.gd-teaser,.lb,.pres{zoom:1.42}}
 /* very narrow phones and foldables */
 @media (max-width:370px){.brand .ank,.brand i{display:none}.brand img{height:18px}.nav{gap:8px}.navr{gap:6px}.menu{width:38px;height:38px}}
 /* phones: Harshitha's button becomes her portrait only */
