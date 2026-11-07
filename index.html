@@ -1302,7 +1302,12 @@ if(/[?&#]present/.test(location.href))setTimeout(pOpen,400);
 observe();new MutationObserver(observe).observe(document.body,{childList:true,subtree:true});
 </script>
 <!-- ===== Harshitha: virtual host ===== -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600&family=Noto+Sans+Telugu:wght@400;500;600&display=swap">
 <style>
+.gd-lang button{font-family:system-ui,"Noto Sans Devanagari","Noto Sans Telugu",sans-serif}
+.gd:lang(hi) :is(.gd-m,.gd-chips button,input,.gd-note,.gd-tour),.gt:lang(hi) :is(#gt-text,#gt-chap,.gt-ctl>button){font-family:"Noto Sans Devanagari",system-ui,sans-serif;letter-spacing:0}
+.gd:lang(te) :is(.gd-m,.gd-chips button,input,.gd-note,.gd-tour),.gt:lang(te) :is(#gt-text,#gt-chap,.gt-ctl>button){font-family:"Noto Sans Telugu",system-ui,sans-serif;letter-spacing:0}
+.gd-m :is(p,span,small),.gd-m{font-family:inherit}
 .gd-fab{position:fixed;z-index:70;right:max(18px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:12px;padding:6px 20px 6px 6px;border-radius:999px;background:rgba(21,16,12,.92);color:var(--ivory);border:1px solid rgba(216,167,126,.45);box-shadow:0 14px 40px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transform:translateY(140%);opacity:0;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s}
 .gd-fab.show{transform:none;opacity:1}
 .gd-fab img{width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid var(--copper2)}
@@ -1382,7 +1387,12 @@ observe();new MutationObserver(observe).observe(document.body,{childList:true,su
 .gt-top .ttl{display:flex;align-items:center;gap:14px}
 .gt-top .ttl img{height:26px}
 .gt-top .ttl span{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.85)}
-.gt-ctl{display:flex;gap:8px}
+.gt-ctl{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.gd-lang{display:flex;gap:3px;flex:none}
+.gd-lang button{height:28px;min-width:30px;padding:0 8px;border-radius:999px;border:1px solid rgba(245,240,233,.25);background:transparent;color:var(--ivory,#f5f0e9);font-size:12px;letter-spacing:0;text-transform:none;cursor:pointer}
+.gd-lang button.on{background:linear-gradient(135deg,#EBD3A3,#C9A46A);color:#1a140c;border-color:transparent}
+.gt-ctl .gd-lang button{height:42px;min-width:42px;font-size:13px}
+.gd-lang button::before{content:none!important}
 .gt-ctl button{height:42px;min-width:42px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.35);backdrop-filter:blur(8px);color:#fff;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase}
 .gt-ctl button:hover{background:rgba(255,255,255,.18)}
 .gt-plan.on~.gt-top .ttl span{color:var(--ink)}
@@ -1410,6 +1420,7 @@ observe();new MutationObserver(observe).observe(document.body,{childList:true,su
  .gt-room .nm{top:14px;left:16px;font-size:28px}
  .gt-room{order:2}
  .gt-ctl button{height:38px;min-width:38px;padding:0 11px;font-size:0}
+ .gt-ctl .gd-lang button{height:38px;min-width:34px;font-size:12px;padding:0 8px}
  .gt-ctl button::before{font-size:15px;content:attr(data-i)}
  .gt-top .ttl span{display:none}
  .gt-say{padding:12px 14px 14px}.gt-say p{font-size:15px}
@@ -1424,7 +1435,7 @@ observe();new MutationObserver(observe).observe(document.body,{childList:true,su
   <div class="gt-room" id="gt-room"><img id="gt-ra" alt=""><img id="gt-rb" alt=""><div class="nm" id="gt-rn"></div></div>
  </div>
  <div class="gt-top"><div class="ttl"><img src="img/konak-logo-light.svg" alt="Konak"><span id="gt-chap">Guided tour</span></div>
-  <div class="gt-ctl"><button id="gt-prev" data-i="‹">‹ Back</button><button id="gt-play" data-i="❚❚">❚❚ Pause</button><button id="gt-next" data-i="›">Next ›</button><button id="gt-mute" data-i="♪">♪ Sound</button><button id="gt-x" data-i="✕">✕ Exit</button></div></div>
+  <div class="gt-ctl"><button id="gt-prev" data-i="‹">‹ Back</button><button id="gt-play" data-i="❚❚">❚❚ Pause</button><button id="gt-next" data-i="›">Next ›</button><button id="gt-mute" data-i="♪">♪ Sound</button><button id="gt-x" data-i="✕">✕ Exit</button><div class="gd-lang" role="group" aria-label="Language"><button type="button" data-l="en">EN</button><button type="button" data-l="hi">हिं</button><button type="button" data-l="te">తె</button></div></div></div>
  <div class="gt-bot"><div class="gt-face"><img src="img/host.jpg" alt="Harshitha"><i></i></div>
   <div class="gt-say"><div class="who"><b>Harshitha</b><span id="gt-n"></span></div><p id="gt-text"></p><div class="gt-dots" id="gt-dots"></div></div></div>
 </div>
@@ -1434,6 +1445,7 @@ observe();new MutationObserver(observe).observe(document.body,{childList:true,su
  <div class="gd-head">
   <div class="gd-face"><img src="img/host.jpg" alt="Harshitha"><i></i></div>
   <div class="gd-who"><b>Harshitha</b><span>Konak Clubhouse</span><div class="gd-wave" id="gd-wave" aria-hidden="true"><em></em><em></em><em></em><em></em><em></em><em></em><em></em></div></div>
+  <div class="gd-lang" role="group" aria-label="Language"><button type="button" data-l="en">EN</button><button type="button" data-l="hi">हिं</button><button type="button" data-l="te">తె</button></div>
   <button class="gd-mute" id="gd-mute" aria-label="Turn voice off" title="Voice on/off">🔊</button>
   <button class="gd-x" id="gd-x" aria-label="Close">✕</button>
  </div>
@@ -1441,12 +1453,142 @@ observe();new MutationObserver(observe).observe(document.body,{childList:true,su
  <div class="gd-tour" id="gd-tourbar" hidden><span id="gd-step">Tour</span><div class="bar"><i id="gd-prog"></i></div><button id="gd-pause">Pause</button><button id="gd-stop">Stop</button></div>
  <div class="gd-chips" id="gd-chips"></div>
  <form class="gd-in" id="gd-form" autocomplete="off"><button type="button" class="mic" id="gd-mic" aria-label="Ask by voice" title="Ask by voice">🎙</button><input id="gd-q" placeholder="Ask Harshitha about the clubhouse…" aria-label="Your question"><button type="submit" aria-label="Send">➤</button></form>
- <div class="gd-note">Harshitha answers from the Konak clubhouse design brief.</div>
+ <div class="gd-note" id="gd-note">Harshitha answers from the Konak clubhouse design brief.</div>
 </aside>
 
 <script>
 (function(){
 const $=s=>document.querySelector(s);
+/* --- languages: English, Hindi, Telugu --- */
+const LANGS={en:{code:"en-IN",name:"English",short:"EN"},hi:{code:"hi-IN",name:"हिन्दी",short:"हिं"},te:{code:"te-IN",name:"తెలుగు",short:"తె"}};
+let LANG="en";try{const l=localStorage.getItem("gd-lang");if(LANGS[l])LANG=l}catch(e){}
+const UI={
+ en:{ph:"Ask Harshitha about the clubhouse…",start:"▶ Start the tour from the beginning",show:"Show me",map:"Open the map",pres:"Start presentation",note:"Harshitha answers from the Konak clubhouse design brief.",
+  chips:["Take the tour","Why is it different?","Why the curves?","Tell me about the courtyard","What will my kids love?","Something for my parents?","Surprise me"],
+  endChips:["Why the curves?","Surprise me","What will my kids love?","Show the floor plans","Where is it?"],
+  fallback:"I'd rather not guess on that one. Your Ankura Homes relationship manager can help. In the meantime, I can tell you about the courtyard, the pool, the banquet hall, the theatre or the guest rooms.",
+  end:"That's the tour. Ask me anything you like, or tap a topic below.",stop:"No problem. Ask me anything, or tap a topic below.",
+  back:"‹ Back",pause:"❚❚ Pause",play:"▶ Play",next:"Next ›",exit:"✕ Exit",snd:"♪ Sound",mute:"♪ Muted",tourLbl:"Pause",stopLbl:"Stop",novoice:""},
+ hi:{ph:"हर्षिता से क्लबहाउस के बारे में पूछें…",start:"▶ शुरुआत से टूर शुरू करें",show:"दिखाइए",map:"मैप खोलें",pres:"प्रेज़ेंटेशन शुरू करें",note:"हर्षिता कोनक क्लबहाउस के डिज़ाइन के आधार पर जवाब देती हैं।",
+  chips:["टूर शुरू करें","यह अलग क्यों है?","आँगन के बारे में बताइए","स्विमिंग पूल","बच्चों के लिए क्या है?","बुज़ुर्गों के लिए?","फ़्लोर प्लान"],
+  endChips:["यह अलग क्यों है?","बच्चों के लिए क्या है?","फ़्लोर प्लान","यह कहाँ है?"],
+  fallback:"इस बारे में मैं अंदाज़ा नहीं लगाना चाहूँगी। आपके अंकुरा होम्स रिलेशनशिप मैनेजर इसमें मदद करेंगे। तब तक मैं आपको आँगन, पूल, बैंक्वेट हॉल, थिएटर या गेस्ट रूम्स के बारे में बता सकती हूँ।",
+  end:"यह था हमारा टूर। आप कुछ भी पूछ सकते हैं, या नीचे कोई विषय चुनें।",stop:"ठीक है। कुछ भी पूछिए, या नीचे कोई विषय चुनें।",
+  back:"‹ पीछे",pause:"❚❚ रोकें",play:"▶ चलाएँ",next:"आगे ›",exit:"✕ बंद",snd:"♪ आवाज़",mute:"♪ म्यूट",tourLbl:"रोकें",stopLbl:"बंद",novoice:"इस ब्राउज़र में हिन्दी आवाज़ उपलब्ध नहीं है, इसलिए हर्षिता लिखकर बताएँगी।"},
+ te:{ph:"క్లబ్‌హౌస్ గురించి హర్షితను అడగండి…",start:"▶ మొదటి నుంచి టూర్ ప్రారంభించండి",show:"చూపించండి",map:"మ్యాప్ తెరవండి",pres:"ప్రెజెంటేషన్ ప్రారంభించండి",note:"హర్షిత కోనక్ క్లబ్‌హౌస్ డిజైన్ ఆధారంగా సమాధానం ఇస్తారు.",
+  chips:["టూర్ ప్రారంభించండి","ఇది ఎందుకు ప్రత్యేకం?","ప్రాంగణం గురించి చెప్పండి","స్విమ్మింగ్ పూల్","పిల్లలకు ఏముంది?","పెద్దలకు?","ఫ్లోర్ ప్లాన్"],
+  endChips:["ఇది ఎందుకు ప్రత్యేకం?","పిల్లలకు ఏముంది?","ఫ్లోర్ ప్లాన్","ఇది ఎక్కడ ఉంది?"],
+  fallback:"దీని గురించి నేను ఊహించి చెప్పకూడదు. మీ అంకురా హోమ్స్ రిలేషన్‌షిప్ మేనేజర్ సహాయం చేస్తారు. ఈలోగా ప్రాంగణం, పూల్, బ్యాంక్వెట్ హాల్, థియేటర్ లేదా గెస్ట్ రూమ్‌ల గురించి చెప్పగలను.",
+  end:"ఇదే మన టూర్. మీకు ఏదైనా అడగవచ్చు, లేదా కింద ఒక అంశాన్ని ఎంచుకోండి.",stop:"సరే. ఏదైనా అడగండి, లేదా కింద ఒక అంశాన్ని ఎంచుకోండి.",
+  back:"‹ వెనక్కి",pause:"❚❚ ఆపండి",play:"▶ ప్లే",next:"ముందుకు ›",exit:"✕ మూసివేయండి",snd:"♪ శబ్దం",mute:"♪ మ్యూట్",tourLbl:"ఆపండి",stopLbl:"మూసివేయండి",novoice:"ఈ బ్రౌజర్‌లో తెలుగు వాయిస్ అందుబాటులో లేదు, కాబట్టి హర్షిత రాసి చెబుతారు."}
+};
+const GREET={
+ en:h=>`${h}. I'm Harshitha, and I'll show you around the Konak clubhouse today. I can tell you the story of this design, how it works and why it's built this way. We can start the tour from the beginning, or you can ask me anything. Who are you imagining living here?`,
+ hi:h=>`${h}। मैं हर्षिता हूँ। मैं आपको कोनक क्लबहाउस दिखाऊँगी और इसके डिज़ाइन की कहानी बताऊँगी, यह कैसे काम करता है और ऐसा क्यों बनाया गया है। हम शुरुआत से टूर शुरू कर सकते हैं, या आप कुछ भी पूछ सकते हैं।`,
+ te:h=>`${h}. నేను హర్షిత. కోనక్ క్లబ్‌హౌస్‌ను మీకు చూపిస్తూ, దాని డిజైన్ కథను, అది ఎలా పనిచేస్తుందో, ఎందుకు ఇలా నిర్మించారో చెబుతాను. మొదటి నుంచి టూర్ ప్రారంభించవచ్చు, లేదా మీరు ఏదైనా అడగవచ్చు.`
+};
+const HELLO={en:["Good morning","Good afternoon","Good evening"],hi:["सुप्रभात","नमस्ते","शुभ संध्या"],te:["శుభోదయం","నమస్కారం","శుభ సాయంత్రం"]};
+const TOUR_T={
+ hi:{titles:["स्वागत","आगमन","विचार","प्लान का दिल","यह कैसे काम करता है","ग्राउंड फ़्लोर","पहली मंज़िल","दूसरी मंज़िल","यहाँ की ज़िंदगी","हर पीढ़ी के लिए","सामग्री","खुलती ज़िंदगी"],texts:[
+ "नमस्ते, मैं हर्षिता हूँ। मैं आपको इस क्लबहाउस की कहानी सुनाऊँगी। सिर्फ़ कमरे नहीं दिखाऊँगी, बल्कि यह भी बताऊँगी कि हर जगह वहाँ क्यों है और वह कैसा महसूस कराती है।",
+ "हर अच्छी इमारत की शुरुआत आगमन से होती है। यहाँ सामने का हिस्सा जानबूझकर शांत रखा गया है: पत्थर की दीवार, हरे प्लांटर और ऊँचा काँच का प्रवेश द्वार। काँच के पार आपको लाल रिबन और अंदर का आँगन झलकता है। यह एक निमंत्रण है।",
+ "इसका विचार है खुलता हुआ परिदृश्य। जैसे किसी घाटी में चलते हुए हर मोड़ पर नया दृश्य खुलता है, वैसे ही यह इमारत धीरे-धीरे खुद को दिखाती है। इसलिए यह सुविधाओं से भरा कोई बड़ा हॉल नहीं, बल्कि एक सफ़र जैसा लगता है।",
+ "सबसे अहम फ़ैसला यह था कि लॉबी की जगह इमारत के बीच में एक हरा-भरा आँगन बनाया जाए, जो ऊपर तक खुला है। इससे अंदर तक रोशनी आती है, हर मंज़िल से हरियाली दिखती है, और सब लोग यहीं मिलते हैं। बाकी सब कुछ इसी के चारों ओर रखा गया है।",
+ "रोज़ की ज़िंदगी में इसका मतलब है कि कोई लंबे, अँधेरे गलियारे नहीं हैं। आँगन हमेशा दिखता है, इसलिए आप कभी भटकते नहीं। घुमावदार छतें आपको एक जगह से दूसरी जगह तक धीरे से ले जाती हैं, और बीच से आती रोशनी हर कमरे को खुला और शांत बनाती है।",
+ "अब ग्राउंड फ़्लोर का प्लान देखते हैं। लाउंज सीढ़ियों के दोनों ओर, आँगन के चारों तरफ़ हैं। ग्रोसरी, सैलून और फ़र्स्ट-एड रूम प्रवेश के पास हैं, ताकि छोटे काम जल्दी हो जाएँ। स्विमिंग पूल और बैडमिंटन कोर्ट को अपनी अलग, खुली जगह मिली है।",
+ "पहली मंज़िल पर ऊर्जा बढ़ जाती है। लॉबी लाउंज आँगन के ऊपर के खुले हिस्से के चारों ओर हैं। जिम और स्टूडियो बाहरी दीवारों के साथ हैं, ताकि दिन की रोशनी मिले। कॉन्फ़्रेंस रूम थोड़ा अलग और शांत है, और बैंक्वेट हॉल डबल-हाइट है, ताकि हर जश्न भव्य लगे।",
+ "दूसरी मंज़िल सबसे शांत है, और यह सोच-समझकर किया गया है। थिएटर एक कोने में है ताकि आवाज़ अच्छी रहे, गेम्स रूम सामने है, और गेस्ट रूम्स का अपना शांत हिस्सा है।",
+ "कोई भी इमारत तभी सफल है जब लोग उसे रोज़ इस्तेमाल करें। सुबह पूल में तैराकी, स्टूडियो में योग, कॉन्फ़्रेंस रूम में काम, नीचे छोटे-मोटे काम, और शाम को लॉन पर खेलते बच्चे और बैंक्वेट हॉल में परिवार। यह डिज़ाइन इन सबका साथ देता है।",
+ "यहाँ हर उम्र के लिए जगह है। बच्चे माता-पिता की नज़र के सामने खेल सकते हैं, बुज़ुर्गों के लिए आरामदायक बैठने की जगह है, और मेहमानों के लिए ठहरने के कमरे हैं। जब हर पीढ़ी को आने का कारण मिलता है, तो पड़ोसी एक समुदाय बन जाते हैं।",
+ "सामग्री शांत और प्राकृतिक है: पत्थर, प्लास्टर, लकड़ी, धातु और हरियाली। ये समय के साथ और सुंदर होती हैं। लकड़ी में गर्माहट आती है, पीतल नरम पड़ता है, और पत्थर में चरित्र आता है।",
+ "तो यह है कोनक क्लबहाउस की कहानी: एक बगीचे के चारों ओर बना, रोज़ की ज़िंदगी के लिए बनाया गया एक परिदृश्य। डिज़ाइन के बारे में कुछ भी पूछिए, या अंकुरा टीम से साइट विज़िट तय कीजिए।"]},
+ te:{titles:["స్వాగతం","రాక","ఆలోచన","ప్లాన్ హృదయం","ఇది ఎలా పనిచేస్తుంది","గ్రౌండ్ ఫ్లోర్","మొదటి అంతస్తు","రెండో అంతస్తు","ఇక్కడి జీవితం","ప్రతి తరానికీ","మెటీరియల్స్","విప్పుకునే జీవితం"],texts:[
+ "నమస్కారం, నేను హర్షిత. ఈ క్లబ్‌హౌస్ కథను మీకు చెబుతాను. గదులను మాత్రమే కాదు, ప్రతి స్థలం అక్కడ ఎందుకు ఉందో, అది ఎలా అనిపిస్తుందో కూడా వివరిస్తాను.",
+ "ప్రతి మంచి భవనం రాకతోనే మొదలవుతుంది. ఇక్కడ ముందు భాగాన్ని కావాలనే ప్రశాంతంగా ఉంచారు: రాతి గోడ, పచ్చని ప్లాంటర్లు, ఎత్తైన గాజు ద్వారం. గాజు గుండా లోపల ఎర్రటి రిబ్బన్, ప్రాంగణం కనిపిస్తాయి. ఇది ఒక ఆహ్వానం లాంటిది.",
+ "దీని ఆలోచన విప్పుకునే ప్రకృతి దృశ్యం. ఒక లోయలో నడుస్తున్నప్పుడు ప్రతి మలుపులో కొత్త దృశ్యం కనిపించినట్టే, ఈ భవనం కూడా నెమ్మదిగా తనను తాను చూపిస్తుంది. అందుకే ఇది సౌకర్యాలతో నిండిన పెద్ద హాల్‌లా కాకుండా, ఒక ప్రయాణంలా అనిపిస్తుంది.",
+ "అత్యంత ముఖ్యమైన నిర్ణయం ఏమిటంటే, లాబీకి బదులుగా భవనం మధ్యలో పైవరకు తెరిచి ఉండే పచ్చని ప్రాంగణం పెట్టడం. దీని వల్ల లోపలి వరకు వెలుతురు వస్తుంది, ప్రతి అంతస్తు నుంచీ పచ్చదనం కనిపిస్తుంది, అందరూ ఇక్కడే కలుస్తారు. మిగతావన్నీ దీని చుట్టూ ఉంటాయి.",
+ "రోజువారీ జీవితంలో దీని అర్థం, పొడవైన చీకటి కారిడార్లు ఉండవు. ప్రాంగణం ఎప్పుడూ కనిపిస్తుంది కాబట్టి దారి తప్పరు. వంపు తిరిగిన పైకప్పులు మిమ్మల్ని ఒక చోటు నుంచి మరో చోటుకు నెమ్మదిగా తీసుకెళ్తాయి, మధ్య నుంచి వచ్చే వెలుతురు ప్రతి గదిని విశాలంగా, ప్రశాంతంగా ఉంచుతుంది.",
+ "ఇప్పుడు గ్రౌండ్ ఫ్లోర్ ప్లాన్ చూద్దాం. లాంజ్‌లు మెట్లకు రెండు వైపులా, ప్రాంగణం చుట్టూ ఉన్నాయి. గ్రోసరీ, సెలూన్, ఫస్ట్-ఎయిడ్ రూమ్ ప్రవేశద్వారం దగ్గరే ఉన్నాయి, కాబట్టి చిన్న పనులు త్వరగా అయిపోతాయి. స్విమ్మింగ్ పూల్, బ్యాడ్మింటన్ కోర్ట్‌కు వాటి సొంత విశాలమైన భాగాలు ఉన్నాయి.",
+ "మొదటి అంతస్తులో ఉత్సాహం పెరుగుతుంది. లాబీ లాంజ్‌లు ప్రాంగణం పైన ఉన్న ఓపెనింగ్ చుట్టూ ఉంటాయి. జిమ్, స్టూడియో బయటి గోడల వెంట ఉండి పగటి వెలుతురు పొందుతాయి. కాన్ఫరెన్స్ రూమ్ కాస్త విడిగా, నిశ్శబ్దంగా ఉంటుంది. బ్యాంక్వెట్ హాల్ డబుల్-హైట్‌లో ఉంది, కాబట్టి ప్రతి వేడుక గొప్పగా అనిపిస్తుంది.",
+ "రెండో అంతస్తు అన్నిటికంటే ప్రశాంతమైనది, ఇది కావాలనే అలా చేశారు. మంచి సౌండ్ కోసం థియేటర్ ఒక మూలలో ఉంది, గేమ్స్ రూమ్ ముందు వైపు ఉంది, గెస్ట్ రూమ్‌లకు వాటి సొంత ప్రశాంతమైన భాగం ఉంది.",
+ "ప్రజలు రోజూ ఉపయోగిస్తేనే ఏ భవనమైనా విజయవంతమవుతుంది. ఉదయం పూల్‌లో ఈత, స్టూడియోలో యోగా, కాన్ఫరెన్స్ రూమ్‌లో పని, కింద చిన్న పనులు, సాయంత్రం లాన్‌పై ఆడుకునే పిల్లలు, బ్యాంక్వెట్ హాల్‌లో కుటుంబాలు. ఈ డిజైన్ అన్నిటికీ తోడుంటుంది.",
+ "ఇక్కడ ప్రతి వయసు వారికీ చోటు ఉంది. పిల్లలు తల్లిదండ్రుల కళ్ల ముందే ఆడుకోవచ్చు, పెద్దలకు సౌకర్యంగా కూర్చునే చోట్లు ఉన్నాయి, వచ్చే అతిథులకు ఉండే గదులు ఉన్నాయి. ప్రతి తరానికీ రావడానికి కారణం ఉన్నప్పుడు, ఇరుగుపొరుగు ఒక సమాజంగా మారుతారు.",
+ "మెటీరియల్స్ ప్రశాంతంగా, సహజంగా ఉంటాయి: రాయి, ప్లాస్టర్, చెక్క, లోహం, పచ్చదనం. ఇవి కాలంతో పాటు మరింత అందంగా మారతాయి. చెక్క వెచ్చగా, ఇత్తడి మృదువుగా, రాయి మరింత ప్రత్యేకంగా మారుతుంది.",
+ "ఇదే కోనక్ క్లబ్‌హౌస్ కథ: ఒక తోట చుట్టూ, రోజువారీ జీవితం కోసం రూపొందించిన ఒక ప్రకృతి దృశ్యం. డిజైన్ గురించి ఏదైనా అడగండి, లేదా సైట్ విజిట్ కోసం అంకురా టీమ్‌ను సంప్రదించండి."]}
+};
+/* answers and keywords for Hindi and Telugu (keyed by the English topic id) */
+const KBL={
+ hi:{
+  hello:[/नमस्ते|नमस्कार|हेलो|हाय/,"नमस्ते। मैं हर्षिता हूँ। आप शुरुआत से टूर ले सकते हैं, या क्लबहाउस के बारे में कुछ भी पूछ सकते हैं।"],
+  diff:[/अलग|ख़ास|खास|विशेष|क्यों लें|दूसरे क्लब/,"ज़्यादातर क्लबहाउस सुविधाओं की एक सूची होते हैं। यहाँ अंदर आते ही लॉबी की जगह एक बगीचा मिलता है। रोशनी इमारत के बीच से आती है, जगहें घुमावदार तरीके से एक-दूसरे में खुलती हैं, और यह रोज़ की ज़िंदगी के लिए बना है, जिसमें मेहमानों के कमरे, सैलून और ग्रोसरी भी हैं।"],
+  why:[/क्यों|प्लानिंग|ज़ोनिंग|योजना|कैसे काम/,"सबसे बड़ा विचार यह है कि आँगन प्लान का दिल है। सब कुछ इसके चारों ओर है, इसलिए रोशनी बीच तक पहुँचती है, हर मंज़िल से हरियाली दिखती है, और आप गलियारों में भटकते नहीं। ऊपर जाते-जाते मंज़िलें और शांत होती जाती हैं।"],
+  curves:[/घुमाव|कर्व|गोल/,"सीधे गलियारे आपको जल्दी-जल्दी चलाते हैं। घुमाव आपको धीमा करते हैं और अगले मोड़ पर क्या है, यह देखने के लिए खींचते हैं। इससे इमारत ज़्यादा शांत लगती है।"],
+  light:[/रोशनी|लाइट|प्रकाश|झूमर/,"रोशनी परतों में है। दिन में ऊपर से आँगन में रोशनी आती है, फिर छिपी हुई गर्म कोव लाइट्स, पेंडेंट लाइट्स और कला पर हल्की लाइट्स। बैंक्वेट हॉल में झूमर वाली छत है।"],
+  court:[/आँगन|आंगन|बगीचा|गार्डन|झरना|पानी|लॉन|हरियाली|पेड़/,"आँगन इस इमारत का दिल है। अंदर नरम लॉन, बच्चों के चढ़ने के लिए चिकने सफ़ेद पत्थर, फ़र्न और पाम, और पत्थर की दीवार पर बहता हल्का झरना है। ऊपर से आती रोशनी इसे बहुत शांत बनाती है।"],
+  art:[/रिबन|मूर्ति|कला|लाल/,"लाल रिबन आँगन की पूरी ऊँचाई में बहता है, इसलिए यह हर मंज़िल से दिखता है। शांत रंगों के बीच यह एक लाल रेखा आँख को रुकने की जगह देती है।"],
+  pool:[/पूल|स्विमिंग|तैराकी|तैरना/,"पूल के ऊपर लकड़ी की छत है, जो आवाज़ की गूँज को कम करती है, इसलिए यह किसी शोर वाले पब्लिक पूल जैसा नहीं, बल्कि रिसॉर्ट जैसा लगता है। पास में एक गैलरी है जहाँ बुज़ुर्ग आराम से बैठकर बच्चों को देख सकते हैं।"],
+  gym:[/जिम|फ़िटनेस|फिटनेस|व्यायाम|कसरत/,"पहली मंज़िल पर फ़िटनेस सेंटर में कार्डियो, स्ट्रेंथ और फ़ंक्शनल ट्रेनिंग की जगहें हैं, और ऊपर रोशनी की लहरदार रेखाएँ हैं। अब जिम के लिए ट्रैफ़िक में जाने की ज़रूरत नहीं।"],
+  studio:[/योग|डांस|नृत्य|स्टूडियो|ज़ुम्बा|ध्यान/,"स्टूडियो में दो तरफ़ से दिन की रोशनी आती है। सुबह का योग, दोस्तों के साथ ज़ुम्बा या बच्चों की डांस क्लास, सबके लिए यह सही जगह है।"],
+  badminton:[/बैडमिंटन/,"बैडमिंटन कोर्ट डबल-हाइट है, इसलिए ऊँचे शॉट छत से नहीं टकराते। किनारे पर बैठने की गैलरी है, ताकि परिवार खेल देख सके।"],
+  squash:[/स्क्वैश/,"यहाँ एक असली स्क्वैश कोर्ट है, डबल-हाइट, सही दीवारों और स्पोर्ट्स लाइटिंग के साथ। काम के बाद के लिए यह बढ़िया खेल है।"],
+  games:[/खेल|गेम|स्नूकर|टेबल टेनिस|कैरम|शतरंज/,"गेम्स रूम में स्नूकर, टेबल टेनिस और कैरम है। हर टेबल के ठीक ऊपर लाइट है, इसलिए माहौल आरामदायक लगता है। यहाँ बच्चे और बुज़ुर्ग साथ खेलते हैं।"],
+  theatre:[/थिएटर|सिनेमा|फ़िल्म|फिल्म|मूवी|क्रिकेट/,"दूसरी मंज़िल पर होम थिएटर में सत्ताईस रिक्लाइनर, बड़ी स्क्रीन और स्नैक काउंटर है। दीवारों पर एकॉस्टिक पैनल हैं, जिससे आवाज़ साफ़ रहती है।"],
+  banquet:[/बैंक्वेट|पार्टी|जश्न|शादी|जन्मदिन|त्योहार|दिवाली|समारोह|हॉल/,"बैंक्वेट हॉल डबल-हाइट है, झूमर वाली छत, कपड़े और पीतल के पैनल और अपना स्टेज है। जन्मदिन, सालगिरह और त्योहार, सब यहीं घर के पास मनाए जा सकते हैं।"],
+  guest:[/मेहमान|गेस्ट|रिश्तेदार|ठहर|होटल/,"दूसरी मंज़िल पर होटल जैसे गेस्ट रूम्स हैं, हर कमरे के साथ अपना बाथरूम। जब परिवार मिलने आए, तो उनके लिए एक अच्छा कमरा हमेशा तैयार है।"],
+  work:[/काम|ऑफ़िस|ऑफिस|मीटिंग|कॉन्फ़्रेंस|कॉन्फ्रेंस/,"यहाँ एक रोशन कॉन्फ़्रेंस रूम और साथ में काम करने की जगह है। ज़रूरी कॉल यहाँ लीजिए और दो मिनट में घर वापस।"],
+  daily:[/सैलून|बाल|ग्रोसरी|दुकान|किराना|दूध|डॉक्टर|फ़र्स्ट एड|फर्स्ट एड/,"यहाँ सैलून, एक छोटी ग्रोसरी और फ़र्स्ट-एड रूम है। छोटी चीज़ें, लेकिन इनसे हर महीने शहर के कई चक्कर बचते हैं।"],
+  lounge:[/लाउंज|बैठ|कॉफ़ी|लॉबी|रिसेप्शन/,"लाउंज प्लांटर्स के चारों ओर छोटे-छोटे हिस्सों में बने हैं, ताकि आप अपने लोगों के साथ बैठें और फिर भी माहौल का हिस्सा रहें।"],
+  kids:[/बच्च|बच्चे|बेटा|बेटी/,"बच्चों के लिए यहाँ लॉन, चढ़ने के पत्थर, पूल, बैडमिंटन और गेम्स रूम है, सब सुरक्षित और पास में। माता-पिता पास के लाउंज से उन्हें देख सकते हैं।"],
+  elders:[/बुज़ुर्ग|बुजुर्ग|दादा|दादी|नाना|नानी|माता-पिता|माँ|पिता/,"बुज़ुर्गों के लिए शांत लाउंज, सुबह का हल्का योग, पूल की गैलरी और पास में फ़र्स्ट-एड रूम है। रास्तों पर बैठने की जगहें भी हैं।"],
+  mat:[/सामग्री|पत्थर|लकड़ी|पीतल|मटीरियल|रंग|फ़िनिश/,"यहाँ पत्थर, प्लास्टर, लकड़ी, धातु और हरियाली इस्तेमाल हुई है। ये सामग्रियाँ समय के साथ और सुंदर होती हैं, इसलिए क्लबहाउस सालों बाद भी नया और समृद्ध दिखेगा।"],
+  plan:[/प्लान|नक्शा|नक़्शा|लेआउट|मंज़िल|मंजिल|फ़्लोर|फ्लोर/,"यह रहा फ़्लोर प्लान। किसी भी नंबर पर टैप करें, वह कमरा दिखेगा। या प्लान टूर दबाएँ, मैं हर जगह दिखाऊँगी।"],
+  size:[/साइज़|आकार|कितना बड़ा|स्क्वायर|वर्ग फ़ीट/,"क्लबहाउस लगभग तीस हज़ार वर्ग फ़ीट का है, तीन मंज़िलों में, और यह सिर्फ़ कोनक के एक सौ बीस परिवारों के लिए है।"],
+  where:[/कहाँ|कहां|लोकेशन|पता|मैप|रास्ता/,"कोनक चिमलदरी कोनापुर, हैदराबाद, तेलंगाना में है। मैं आपके लिए मैप खोल देती हूँ।"],
+  price:[/कीमत|दाम|रेट|बजट|लोन|ईएमआई|बुकिंग|प्लॉट|विला|ख़रीद|खरीद/,"सही कीमत और उपलब्धता के लिए आपके अंकुरा होम्स रिलेशनशिप मैनेजर सबसे सही व्यक्ति हैं। वे साइट विज़िट भी तय कर सकते हैं।"],
+  when:[/कब|तैयार|पूरा|पज़ेशन|हैंडओवर/,"पूरा होने और हैंडओवर की ताज़ा जानकारी आपके अंकुरा होम्स रिलेशनशिप मैनेजर के पास होगी।"],
+  practical:[/पार्किंग|कार|लिफ़्ट|लिफ्ट|सुरक्षा|मेंटेनेंस/,"इस तरह की व्यावहारिक जानकारी के लिए कृपया अपने अंकुरा होम्स रिलेशनशिप मैनेजर से पुष्टि कर लें।"],
+  gallery:[/फ़ोटो|फोटो|तस्वीर|गैलरी|रेंडर/,"गैलरी में हर जगह के सारे व्यू हैं, जिन्हें आप मंज़िल के हिसाब से देख सकते हैं।"],
+  me:[/कौन|तुम्हारा नाम|आपका नाम|असली|रोबोट/,"मैं हर्षिता हूँ, कोनक क्लबहाउस की वर्चुअल गाइड। मैं असली इंसान नहीं हूँ, लेकिन इस डिज़ाइन को अच्छी तरह जानती हूँ।"],
+  thanks:[/धन्यवाद|शुक्रिया|बढ़िया|सुंदर|अच्छा/,"धन्यवाद। आपको कौन-सी जगह सबसे ज़्यादा पसंद आई?"],
+  bye:[/अलविदा|बाय|फिर मिलेंगे/,"आपसे बात करके अच्छा लगा। उम्मीद है जल्द ही कोनक में मिलेंगे।"]
+ },
+ te:{
+  hello:[/నమస్కారం|నమస్తే|హలో|హాయ్/,"నమస్కారం. నేను హర్షిత. మీరు మొదటి నుంచి టూర్ తీసుకోవచ్చు, లేదా క్లబ్‌హౌస్ గురించి ఏదైనా అడగవచ్చు."],
+  diff:[/ప్రత్యేక|తేడా|భిన్నం|ఎందుకు తీసుకోవాలి|ఇతర క్లబ్/,"చాలా క్లబ్‌హౌస్‌లు సౌకర్యాల జాబితా మాత్రమే. ఇక్కడ లోపలికి రాగానే లాబీకి బదులు ఒక తోట కనిపిస్తుంది. వెలుతురు భవనం మధ్య నుంచి వస్తుంది, స్థలాలు వంపులతో ఒకదానిలోకి ఒకటి తెరుచుకుంటాయి. గెస్ట్ రూమ్‌లు, సెలూన్, గ్రోసరీతో ఇది రోజువారీ జీవితం కోసం రూపొందింది."],
+  why:[/ఎందుకు|ప్లానింగ్|జోనింగ్|ఎలా పనిచేస్తుంది|ఏర్పాటు/,"ముఖ్యమైన ఆలోచన ఏమిటంటే ప్రాంగణమే ప్లాన్‌కు హృదయం. అన్నీ దాని చుట్టూ ఉంటాయి, కాబట్టి వెలుతురు మధ్య వరకు వస్తుంది, ప్రతి అంతస్తు నుంచీ పచ్చదనం కనిపిస్తుంది, కారిడార్లలో దారి తప్పరు. పైకి వెళ్లే కొద్దీ అంతస్తులు మరింత ప్రశాంతంగా ఉంటాయి."],
+  curves:[/వంపు|కర్వ్|గుండ్రని/,"నేరుగా ఉండే కారిడార్లు మిమ్మల్ని తొందరగా నడిపిస్తాయి. వంపులు మిమ్మల్ని నెమ్మదిగా, తర్వాత మలుపులో ఏముందో చూసేలా చేస్తాయి. దీని వల్ల భవనం మరింత ప్రశాంతంగా అనిపిస్తుంది."],
+  light:[/వెలుతురు|లైట్|కాంతి|షాండ్లియర్/,"లైటింగ్ పొరలుగా ఉంటుంది. పగలు పై నుంచి ప్రాంగణంలోకి వెలుతురు, తర్వాత దాగి ఉన్న వెచ్చని కోవ్ లైట్లు, పెండెంట్ లైట్లు, కళాకృతులపై మృదువైన లైట్లు. బ్యాంక్వెట్ హాల్‌లో షాండ్లియర్ పైకప్పు ఉంది."],
+  court:[/ప్రాంగణం|తోట|గార్డెన్|జలపాతం|నీరు|లాన్|పచ్చదనం|చెట్లు/,"ప్రాంగణమే ఈ భవనానికి హృదయం. లోపల మెత్తని లాన్, పిల్లలు ఎక్కడానికి నునుపైన తెల్లని రాళ్లు, ఫెర్న్‌లు, పామ్ చెట్లు, రాతి గోడపై ప్రవహించే చిన్న జలపాతం ఉన్నాయి. పై నుంచి వచ్చే వెలుతురు దీన్ని చాలా ప్రశాంతంగా ఉంచుతుంది."],
+  art:[/రిబ్బన్|శిల్పం|కళ|ఎరుపు/,"ఎర్రటి రిబ్బన్ ప్రాంగణం మొత్తం ఎత్తులో ప్రవహిస్తుంది, కాబట్టి ప్రతి అంతస్తు నుంచీ కనిపిస్తుంది. ప్రశాంతమైన రంగుల మధ్య ఈ ఒక్క ఎరుపు రేఖ కంటికి ఆగే చోటు ఇస్తుంది."],
+  pool:[/పూల్|స్విమ్మింగ్|ఈత/,"పూల్ పైన చెక్క పైకప్పు ఉంది, ఇది ప్రతిధ్వనిని తగ్గిస్తుంది, కాబట్టి ఇది శబ్దంతో నిండిన పబ్లిక్ పూల్‌లా కాకుండా రిసార్ట్‌లా అనిపిస్తుంది. పక్కనే ఒక గ్యాలరీ ఉంది, అక్కడ పెద్దలు కూర్చుని పిల్లలను చూడవచ్చు."],
+  gym:[/జిమ్|ఫిట్‌నెస్|ఫిట్నెస్|వ్యాయామం|వర్కౌట్/,"మొదటి అంతస్తులోని ఫిట్‌నెస్ సెంటర్‌లో కార్డియో, స్ట్రెంత్, ఫంక్షనల్ ట్రైనింగ్ స్థలాలు ఉన్నాయి. ఇక జిమ్ కోసం ట్రాఫిక్‌లో వెళ్లాల్సిన అవసరం లేదు."],
+  studio:[/యోగా|డాన్స్|నృత్యం|స్టూడియో|జుంబా|ధ్యానం/,"స్టూడియోకు రెండు వైపుల నుంచి పగటి వెలుతురు వస్తుంది. ఉదయం యోగా, స్నేహితులతో జుంబా, పిల్లల డాన్స్ క్లాస్, అన్నిటికీ ఇది సరైన చోటు."],
+  badminton:[/బ్యాడ్మింటన్/,"బ్యాడ్మింటన్ కోర్ట్ డబుల్-హైట్‌లో ఉంది, కాబట్టి ఎత్తైన షాట్లు పైకప్పుకు తగలవు. పక్కన కూర్చునే గ్యాలరీ ఉంది, కుటుంబం ఆట చూడవచ్చు."],
+  squash:[/స్క్వాష్/,"ఇక్కడ నిజమైన స్క్వాష్ కోర్ట్ ఉంది, డబుల్-హైట్‌లో, సరైన గోడలు, స్పోర్ట్స్ లైటింగ్‌తో. ఆఫీస్ తర్వాత ఆడటానికి చాలా బాగుంటుంది."],
+  games:[/ఆట|గేమ్|స్నూకర్|టేబుల్ టెన్నిస్|క్యారమ్|చెస్/,"గేమ్స్ రూమ్‌లో స్నూకర్, టేబుల్ టెన్నిస్, క్యారమ్ ఉన్నాయి. ప్రతి టేబుల్ పైన లైట్ ఉంటుంది, కాబట్టి వాతావరణం హాయిగా ఉంటుంది. ఇక్కడ పిల్లలు, పెద్దలు కలిసి ఆడుకుంటారు."],
+  theatre:[/థియేటర్|సినిమా|మూవీ|క్రికెట్/,"రెండో అంతస్తులోని హోమ్ థియేటర్‌లో ఇరవై ఏడు రిక్లైనర్లు, పెద్ద స్క్రీన్, స్నాక్ కౌంటర్ ఉన్నాయి. గోడలపై అకౌస్టిక్ ప్యానెల్స్ వల్ల శబ్దం స్పష్టంగా ఉంటుంది."],
+  banquet:[/బ్యాంక్వెట్|పార్టీ|వేడుక|పెళ్లి|పుట్టినరోజు|పండుగ|దీపావళి|సంక్రాంతి|హాల్/,"బ్యాంక్వెట్ హాల్ డబుల్-హైట్‌లో ఉంది, షాండ్లియర్ పైకప్పు, వస్త్రం, ఇత్తడి ప్యానెల్స్, సొంత స్టేజ్‌తో. పుట్టినరోజులు, వార్షికోత్సవాలు, పండుగలు అన్నీ ఇంటి దగ్గరే జరుపుకోవచ్చు."],
+  guest:[/అతిథి|గెస్ట్|బంధువులు|ఉండటానికి|హోటల్/,"రెండో అంతస్తులో హోటల్ లాంటి గెస్ట్ రూమ్‌లు ఉన్నాయి, ప్రతి గదికి సొంత బాత్రూమ్. కుటుంబం వచ్చినప్పుడు వారికి ఎప్పుడూ ఒక మంచి గది సిద్ధంగా ఉంటుంది."],
+  work:[/పని|ఆఫీస్|మీటింగ్|కాన్ఫరెన్స్/,"ఇక్కడ వెలుతురుతో నిండిన కాన్ఫరెన్స్ రూమ్, పక్కనే పని చేసుకునే స్థలం ఉన్నాయి. ముఖ్యమైన కాల్ ఇక్కడ తీసుకుని, రెండు నిమిషాల్లో ఇంటికి వెళ్లవచ్చు."],
+  daily:[/సెలూన్|జుట్టు|గ్రోసరీ|షాప్|కిరాణా|పాలు|డాక్టర్|ఫస్ట్ ఎయిడ్/,"ఇక్కడ సెలూన్, చిన్న గ్రోసరీ, ఫస్ట్-ఎయిడ్ రూమ్ ఉన్నాయి. చిన్న విషయాలే, కానీ ప్రతి నెలా నగరానికి ఎన్నో ప్రయాణాలను తప్పిస్తాయి."],
+  lounge:[/లాంజ్|కూర్చో|కాఫీ|లాబీ|రిసెప్షన్/,"లాంజ్‌లు ప్లాంటర్ల చుట్టూ చిన్న చిన్న భాగాలుగా ఉన్నాయి, కాబట్టి మీ వాళ్లతో కూర్చుని కూడా చుట్టూ ఉన్న వాతావరణంలో భాగంగా ఉండవచ్చు."],
+  kids:[/పిల్ల|కొడుకు|కూతురు|పాప|బాబు/,"పిల్లలకు ఇక్కడ లాన్, ఎక్కడానికి రాళ్లు, పూల్, బ్యాడ్మింటన్, గేమ్స్ రూమ్ ఉన్నాయి, అన్నీ సురక్షితంగా, దగ్గరగా. తల్లిదండ్రులు పక్కనే ఉన్న లాంజ్ నుంచి వారిని చూడవచ్చు."],
+  elders:[/పెద్దల|తాత|అమ్మమ్మ|నానమ్మ|తల్లిదండ్రులు|అమ్మ|నాన్న/,"పెద్దల కోసం ప్రశాంతమైన లాంజ్‌లు, ఉదయం తేలికపాటి యోగా, పూల్ గ్యాలరీ, దగ్గర్లోనే ఫస్ట్-ఎయిడ్ రూమ్ ఉన్నాయి. దారుల్లో కూర్చునే చోట్లు కూడా ఉన్నాయి."],
+  mat:[/మెటీరియల్|రాయి|చెక్క|ఇత్తడి|రంగు|ఫినిష్/,"ఇక్కడ రాయి, ప్లాస్టర్, చెక్క, లోహం, పచ్చదనం వాడారు. ఇవి కాలంతో పాటు మరింత అందంగా మారతాయి, కాబట్టి క్లబ్‌హౌస్ ఏళ్ల తర్వాత కూడా గొప్పగా కనిపిస్తుంది."],
+  plan:[/ప్లాన్|మ్యాప్ ఆఫ్|లేఅవుట్|అంతస్తు|ఫ్లోర్/,"ఇదిగో ఫ్లోర్ ప్లాన్. ఏ నంబర్‌పై అయినా ట్యాప్ చేస్తే ఆ గది కనిపిస్తుంది. లేదా ప్లాన్ టూర్ నొక్కండి, ప్రతి స్థలాన్నీ చూపిస్తాను."],
+  size:[/సైజ్|పరిమాణం|ఎంత పెద్ద|చదరపు అడుగులు/,"క్లబ్‌హౌస్ సుమారు ముప్పై వేల చదరపు అడుగులు, మూడు అంతస్తుల్లో ఉంది, ఇది కోనక్‌లోని నూట ఇరవై కుటుంబాల కోసం మాత్రమే."],
+  where:[/ఎక్కడ|లొకేషన్|చిరునామా|మ్యాప్|దారి/,"కోనక్ చిమల్దరి కోనాపూర్, హైదరాబాద్, తెలంగాణలో ఉంది. మీ కోసం మ్యాప్ తెరుస్తాను."],
+  price:[/ధర|రేటు|బడ్జెట్|లోన్|ఈఎంఐ|బుకింగ్|ప్లాట్|విల్లా|కొనుగోలు/,"సరైన ధర, లభ్యత కోసం మీ అంకురా హోమ్స్ రిలేషన్‌షిప్ మేనేజర్‌ను సంప్రదించండి. వారు సైట్ విజిట్ కూడా ఏర్పాటు చేస్తారు."],
+  when:[/ఎప్పుడు|సిద్ధం|పూర్తి|పొసెషన్|హ్యాండోవర్/,"పూర్తి కావడం, హ్యాండోవర్ గురించి తాజా సమాచారం మీ అంకురా హోమ్స్ రిలేషన్‌షిప్ మేనేజర్ వద్ద ఉంటుంది."],
+  practical:[/పార్కింగ్|కారు|లిఫ్ట్|భద్రత|మెయింటెనెన్స్/,"ఇలాంటి ప్రాక్టికల్ వివరాల కోసం దయచేసి మీ అంకురా హోమ్స్ రిలేషన్‌షిప్ మేనేజర్‌తో నిర్ధారించుకోండి."],
+  gallery:[/ఫోటో|చిత్రం|గ్యాలరీ|రెండర్/,"గ్యాలరీలో ప్రతి స్థలానికి సంబంధించిన అన్ని వ్యూలు ఉన్నాయి, అంతస్తుల వారీగా చూడవచ్చు."],
+  me:[/ఎవరు|మీ పేరు|నీ పేరు|నిజమైన|రోబో/,"నేను హర్షిత, కోనక్ క్లబ్‌హౌస్ వర్చువల్ గైడ్‌ని. నేను నిజమైన వ్యక్తిని కాదు, కానీ ఈ డిజైన్ గురించి బాగా తెలుసు."],
+  thanks:[/ధన్యవాదాలు|థాంక్స్|బాగుంది|అందంగా/,"ధన్యవాదాలు. మీకు ఏ స్థలం ఎక్కువగా నచ్చింది?"],
+  bye:[/బై|వెళ్లొస్తా|మళ్లీ కలుద్దాం/,"మీతో మాట్లాడటం బాగుంది. త్వరలో కోనక్‌లో కలుద్దాం."]
+ }
+};
+
+const L=()=>UI[LANG];
 const fab=$("#gd-fab"),gd=$("#gd"),log=$("#gd-log"),chips=$("#gd-chips");
 let voiceOn=true;try{voiceOn=localStorage.getItem("gd-voice")!=="off"}catch(e){}
 const synth=window.speechSynthesis;let VOICE=null;
@@ -1460,6 +1602,8 @@ function pickVoice(){if(!synth)return;const vs=synth.getVoices();if(!vs.length)r
   v=>/^en/i.test(v.lang)&&soft.test(v.name),
   v=>/^en/i.test(v.lang)];
  for(const f of pref){const v=vs.find(f);if(v){VOICE=v;break}}}
+function voiceFor(l){if(l==="en")return VOICE;if(!synth)return null;const vs=synth.getVoices().filter(v=>v.lang.toLowerCase().replace("_","-").startsWith(l));
+ return vs.find(v=>/female|swara|kalpana|shruti|lekha|neerja|madhur|mohan/i.test(v.name)&&/natural|online|neural|premium|enhanced|google/i.test(v.name))||vs.find(v=>/natural|online|neural|google/i.test(v.name))||vs.find(v=>/female|swara|kalpana|shruti|lekha/i.test(v.name))||vs[0]||null}
 if(synth){pickVoice();synth.onvoiceschanged=pickVoice}
 $("#gd-mute").textContent=voiceOn?"🔊":"🔇";
 
@@ -1468,12 +1612,13 @@ const waves=[...document.querySelectorAll("#gd-wave em")];let waveT=null;
 function talking(on){gd.classList.toggle("talking",on);const g=document.getElementById("gt");g&&g.classList.toggle("talking",on);clearInterval(waveT);if(on)waveT=setInterval(()=>waves.forEach(w=>w.style.height=(4+Math.random()*12)+"px"),120);else waves.forEach(w=>w.style.height="4px")}
 function say(text,done,onPart){
  const plain=text.replace(/<[^>]+>/g,"");
- if(!voiceOn||!synth){const ms=Math.max(2600,plain.split(/\s+/).length*330);talking(true);onPart&&onPart(-1);clearTimeout(say.t);say.t=setTimeout(()=>{talking(false);done&&done()},voiceOn&&!synth?ms:ms*.75);return}
+ const V=voiceFor(LANG);
+ if(!voiceOn||!synth||(LANG!=="en"&&!V)){const ms=Math.max(2600,plain.split(/\s+/).length*330);talking(true);onPart&&onPart(-1);clearTimeout(say.t);say.t=setTimeout(()=>{talking(false);done&&done()},voiceOn?ms:ms*.75);return}
  synth.cancel();
- const parts=plain.match(/[^.!?]+[.!?]*/g)||[plain];let i=0;
+ const parts=plain.match(/[^.!?।]+[.!?।]*/g)||[plain];let i=0;
  const next=()=>{if(i>=parts.length){talking(false);done&&done();return}
-  onPart&&onPart(i);const u=new SpeechSynthesisUtterance(parts[i++].trim());if(VOICE)u.voice=VOICE;u.lang=VOICE?VOICE.lang:"en-IN";const q=/\?\s*$/.test(u.text);u.rate=.86+Math.random()*.06;u.pitch=(q?1.18:1.08)+Math.random()*.06;u.volume=.92;
-  u.onstart=()=>talking(true);u.onend=()=>{if(!stopped)setTimeout(()=>{if(!stopped)next()},260)};u.onerror=()=>{talking(false);if(!stopped)done&&done()};synth.speak(u)};
+  onPart&&onPart(i);const u=new SpeechSynthesisUtterance(parts[i++].trim());if(V)u.voice=V;u.lang=V?V.lang:LANGS[LANG].code;u.rate=.95;u.pitch=1;u.volume=1;
+  u.onstart=()=>talking(true);u.onend=()=>{if(!stopped)setTimeout(()=>{if(!stopped)next()},200)};u.onerror=()=>{talking(false);if(!stopped)done&&done()};synth.speak(u)};
  stopped=false;next()}
 let stopped=false;
 function hush(){stopped=true;clearTimeout(say.t);if(synth)synth.cancel();talking(false)}
@@ -1485,9 +1630,8 @@ function add(who,html,act){const d=document.createElement("div");d.className="gd
 const go=id=>{const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:"smooth",block:"start"})};
 const floor=f=>{if(window.planFloor){go("plans");setTimeout(()=>planFloor(f),650)}else{go("floors");setTimeout(()=>{const b=document.querySelector(`.ftab[data-f="${f}"]`);b&&b.click()},500)}};
 const viewSpace=name=>{if(window.showOnPlan&&window.showOnPlan(name))return;const s=SPACES.find(x=>x.n===name);if(s&&s.r.length)openLB(s.r.map(n=>({n,t:s.n,d:s.d,c:FL[s.f]})),0)};
-const OPEN=["",""," ","Oh, lovely question! ","Ah, yes! ","Let me tell you. ","Of course! "];
-function reply(text,act,noOpen){let tx=text;if(!noOpen&&!/^(Oh|Ah|Yes|Hello|Aww|Isn't|You're|That's|Good|Sure|Of course|Let me|It was|I'm)/.test(tx)&&Math.random()<.55)tx=OPEN[Math.floor(Math.random()*OPEN.length)].trim()+(tx?" ":"")+tx;add("her",tx.trim(),act);say(tx.trim())}
-function hello(){const h=new Date(Date.now()+(330+new Date().getTimezoneOffset())*60000).getHours();return h<12?"Good morning":h<17?"Good afternoon":"Good evening"}
+function reply(text,act){const tx=String(text).trim();add("her",tx,act);say(tx)}
+function hello(){const h=new Date(Date.now()+(330+new Date().getTimezoneOffset())*60000).getHours();return HELLO[LANG][h<12?0:h<17?1:2]}
 
 /* --- knowledge: a host who adds stories, reasons and feelings, not the page text --- */
 const pick=a=>a[Math.floor(Math.random()*a.length)];
@@ -1495,17 +1639,17 @@ const ME={who:null,last:null,used:{},asked:0};
 const FOR={
  family:{courtyard:"With little ones, you'll love that the lawn is indoors. No harsh sun, no monsoon puddles, and you can see them from the sofa.",pool:"And the kids' end is right by the gallery seats, so you can sit back with a cup of chai and still keep an eye on them.",theatre:"Children's movie afternoons in the holidays are going to be a big hit here.",games:"Carrom with Dadaji, table tennis with cousins. This room is going to be full every Sunday.",guest:"When the grandparents come for the summer holidays, they'll have their own room, two minutes away."},
  parents:{courtyard:"For your parents, this is the calm spot: the sound of water, soft daylight, and a bench always within a few steps.",pool:"There's a shaded gallery beside the pool, so your parents can enjoy the water without any rush.",theatre:"Recliners, a warm dim light and a good old film. I think your parents will claim the front row.",games:"Carrom and snooker are where elders end up teaching the young ones a trick or two.",guest:"Relatives visiting your parents can stay right here, without anyone giving up their room."},
- couple:{courtyard:"Picture a quiet Sunday morning here with the newspaper, just the two of you and the sound of the waterfall.",pool:"An early morning swim before work, with almost no one else around. It's a lovely way to start the day.",theatre:"Date night, without the traffic. Just book the theatre and walk across.",games:"A friendly snooker rivalry with the neighbours. I've heard it gets quite competitive!",guest:"When friends visit from out of town, you'll have somewhere lovely to put them up."}
+ couple:{courtyard:"Picture a quiet Sunday morning here with the newspaper, just the two of you and the sound of the waterfall.",pool:"An early morning swim before work, with almost no one else around. It's a lovely way to start the day.",theatre:"Date night, without the traffic. Just book the theatre and walk across.",games:"A friendly snooker rivalry with the neighbours. I've heard it gets quite competitive.",guest:"When friends visit from out of town, you'll have somewhere lovely to put them up."}
 };
 const KB=[
  {id:"why",k:/zoning|\bzones?\b|planning|planned|concept|design (idea|logic)|how (does|is) (it|the (building|clubhouse|design|plan))|layout logic|arranged/,v:["Let's start with 'why'. The big idea here is that the courtyard is the heart of the plan. Everything wraps around it, so daylight reaches the middle of the building, every floor has a green view, and you never get lost in corridors.","The floors are planned as a gradient. The ground floor is for daily ease and arrival, the first floor holds the energetic and social spaces, and the top floor is the quietest, for the theatre and the guest rooms. The higher you go, the calmer it gets.","The double-height spaces, the badminton court, the squash court and the banquet hall, were placed so their volume doesn't squeeze the rooms around them. It gives sports and celebrations the height they need."],go:"plans",label:"Show me on the plan"},
- {id:"hello",k:/\b(hi|hello|hey|namaste|namaskar|hai|good (morning|afternoon|evening))\b/,v:["Hello hello! I'm so happy you stopped by. Tell me, is this your first time hearing about Konak?","Namaste! It's lovely to meet you. Before we begin, can I ask who you're picturing living here? Then I can tell you the parts you'll love most."],q:1},
+ {id:"hello",k:/\b(hi|hello|hey|namaste|namaskar|hai|good (morning|afternoon|evening))\b/,v:["Hello. I'm so happy you stopped by. Tell me, is this your first time hearing about Konak?","Namaste. It's lovely to meet you. Before we begin, can I ask who you're picturing living here? Then I can tell you the parts you'll love most."],q:1},
  {id:"diff",k:/differ|special|unique|why konak|better|other club|compare|usp|why should/,v:[
   "Honestly? Most clubhouses are designed around a list. Gym, check. Pool, check. Here, the designers started with a feeling instead: what if walking in felt like stepping into a valley? That's why the first thing you meet is a garden, not a reception desk.",
   "Here's a little test I like. Close your eyes and picture any clubhouse you've visited. Long corridor, doors on both sides, some tube lights. Now picture walking into soft daylight, the sound of water, plants all around you. That's the difference the designers were after.",
   "It's built for everyday life, not just weekends. You'll pop down for milk at the grocery, get a haircut, take a call in the conference room, and your guests will stay in the guest rooms. A clubhouse you actually use every day becomes the heart of a community."],go:"different",label:"See the six differences"},
  {id:"curves",k:/curve|curved|round|organic|flow|ceiling|shape|why.*(soft|curv)/,v:[
-  "Ah, you noticed the curves! Straight corridors make you rush from one door to the next. Curves slow you down and pull you around the corner to see what's next. It's a gentle way of making a building feel calmer.",
+  "You noticed the curves. Straight corridors make you rush from one door to the next. Curves slow you down and pull you around the corner to see what's next. It's a gentle way of making a building feel calmer.",
   "The curved ceilings also hide the lighting in soft coves, so you get a warm glow instead of bright bulbs in your eyes. It's one of those details you feel more than you notice."]},
  {id:"light",k:/light|lighting|chandelier|daylight|bright|sun|window|dark/,v:[
   "My favourite thing to watch here is the light. In the morning it falls into the courtyard from above. By evening the warm cove lights take over, and the whole place starts to glow like a lantern.",
@@ -1515,7 +1659,7 @@ const KB=[
   "Listen for the waterfall next time you visit. It's a shallow sheet of water running down a stone wall, and that soft sound covers the chatter from the lounges. It's a clever way to make a busy space feel peaceful.",
   "Those smooth white boulders aren't only decoration. Children climb them, teenagers sit on them with their phones, and grandparents rest on them. It's furniture that every age uses differently."],go:"heart",label:"Show me the courtyard",fam:"courtyard"},
  {id:"art",k:/ribbon|sculpture|red|art|artwork|painting/,v:[
-  "Ah, the red ribbon! It flows through the whole height of the courtyard, so you meet it again on every floor. On the ground floor you look up at it, and upstairs you're right beside it. It ties the building together, quite literally.",
+  "The red ribbon. It flows through the whole height of the courtyard, so you meet it again on every floor. On the ground floor you look up at it, and upstairs you're right beside it. It ties the building together, quite literally.",
   "Red was a brave choice in such a calm palette, and that's the point. Among stone, wood and green, one ribbon of colour gives your eye somewhere to land. Hotels do this a lot, and it works beautifully here."],space:"The courtyard"},
  {id:"pool",k:/pool|swim/,v:[
   "The pool has a warm timber ceiling above it, and that's not only for looks. Wood softens the echo, so it doesn't sound like a noisy public pool. It feels more like a resort.",
@@ -1527,7 +1671,7 @@ const KB=[
   "The studio gets daylight from two sides, which is lovely for a sunrise yoga session. Soft morning light, a quiet room, and you can hear the birds from the trees outside.",
   "I can already picture the community classes here: Zumba with the ladies in the evening, kids' dance on Saturdays, and a calm yoga session for the elders in the morning."],space:"Studio"},
  {id:"badminton",k:/badminton|shuttle/,v:[
-  "The badminton court is double-height, which matters more than you'd think. High shots don't hit the ceiling, and the space feels big and airy. There's seating along the side for the cheering squad!",
+  "The badminton court is double-height, which matters more than you'd think. High shots don't hit the ceiling, and the space feels big and airy. There's seating along the side for the cheering squad.",
   "If you're a badminton family, get ready for the Konak tournaments. With 120 families and gallery seats, I have a feeling it's going to get competitive."],space:"Badminton court"},
  {id:"squash",k:/squash/,v:["Squash is such a great workout: forty minutes and you're done. Having a proper court right in the clubhouse is quite rare, and it's built double-height with the right walls and lighting.","It's the perfect after-work sport. Quick, intense, and great fun with a neighbour. I think it'll become a little community of its own."],space:"Squash court"},
  {id:"games",k:/sport|game|play|snooker|pool table|billiard|table tennis|carrom|chess/,v:[
@@ -1555,11 +1699,11 @@ const KB=[
  {id:"price",k:/price|cost|rate|budget|emi|loan|book|booking|availab|plot|villa|mansion|buy|purchase|offer|discount/,v:["I'd really love for you to get the exact numbers from the right person, so I won't guess. Your Ankura Homes relationship manager can share prices and availability, and arrange a site visit. And believe me, the courtyard in person is something else."],n:1},
  {id:"when",k:/when|ready|complet|possession|handover|timeline|\bopen\b|construction/,v:["For the latest on completion and handover, your Ankura Homes relationship manager will have the current schedule. I'd rather you hear it from them than get an old date from me."],n:1},
  {id:"practical",k:/park|car|lift|elevator|access|wheelchair|security|maintenance|charges/,v:["That's a very sensible question, and I don't want to guess on practical details like that. Please check it with your Ankura Homes relationship manager so you get the confirmed answer."],n:1},
- {id:"gallery",k:/photo|picture|image|render|gallery|view/,v:["Of course! The gallery has every view. A little tip: look at the courtyard views from the first floor. The ribbon looks completely different from up there."],go:"gallery",label:"Open the gallery"},
- {id:"present",k:/present|slideshow|full ?screen/,v:["Sure! Sit back and enjoy the full-screen presentation."],act:{label:"Start presentation",fn:()=>document.querySelector("#visit [data-present]").click()},n:1},
+ {id:"gallery",k:/photo|picture|image|render|gallery|view/,v:["Of course. The gallery has every view. A little tip: look at the courtyard views from the first floor. The ribbon looks completely different from up there."],go:"gallery",label:"Open the gallery"},
+ {id:"present",k:/present|slideshow|full ?screen/,v:["Sure. Sit back and enjoy the full-screen presentation."],act:{label:"Start presentation",fn:()=>document.querySelector("#visit [data-present]").click()},n:1},
  {id:"me",k:/who are you|your name|are you real|human|robot|\bai\b|harshitha/,v:["I'm Harshitha, your virtual guide to the Konak clubhouse. I'm not a real person, but I know this design inside out: the idea, the plan and the reasons behind each space.","I'm a virtual guide who knows this clubhouse design really well. For prices and paperwork, the real people at Ankura are your best help."],n:1},
- {id:"thanks",k:/thank|thanks|great|nice|lovely|beautiful|wow|awesome|amazing|superb|good/,v:["Aww, thank you! I really do think it's special. Which part caught your eye the most?","I'm so glad you like it! Shall I show you my favourite corner? It's the first-floor lounge looking down over the courtyard."],n:1},
- {id:"bye",k:/\b(bye|goodbye|see you|ok bye|tata)\b/,v:["It was so lovely talking with you! I hope I'll see you at Konak soon. Take care!"],n:1}
+ {id:"thanks",k:/thank|thanks|great|nice|lovely|beautiful|wow|awesome|amazing|superb|good/,v:["Thank you. I really do think it's special. Which part caught your eye the most?","I'm so glad you like it. Shall I show you my favourite corner? It's the first-floor lounge looking down over the courtyard."],n:1},
+ {id:"bye",k:/\b(bye|goodbye|see you|ok bye|tata)\b/,v:["It was so lovely talking with you. I hope I'll see you at Konak soon. Take care."],n:1}
 ];
 const FACTS=["Here's a little secret: the courtyard opening means you can see greenery from all three floors.","Did you know? The badminton, squash and banquet spaces are all double-height, so they feel airy and grand.","A small detail I love is that the planters in the lounges double up as natural dividers, so there are no walls but every group still has its own space.","Fun fact: the theatre has twenty-seven recliners, which is just the right size for a whole community movie night.","The designers called the concept 'the unfolding landscape', because the building reveals itself slowly as you walk, like a path through a valley."];
 const SUGG=["Take the tour","Why is it different?","Why the curves?","Tell me about the courtyard","What will my kids love?","Something for my parents?","Surprise me"];
@@ -1568,13 +1712,14 @@ function nextVar(e){const i=ME.used[e.id]||0;ME.used[e.id]=i+1;return e.v[i%e.v.
 function follow(e){const opts={court:["Shall I show you the courtyard from the first floor?","What would you do first here: sit by the water or let the kids loose on the lawn?"],pool:["Are you a morning swimmer or an evening one?"],diff:["Want me to tell you why the ceilings curve? It's a lovely little story."],theatre:["What would be your first movie here?"],banquet:["Is there a family celebration you're already imagining here?"],gym:["Shall I show you where the gym sits on the plan?"],kids:["How old are your little ones?"],guest:["Do you often have family visiting?"]};const o=opts[e.id];return o?" "+pick(o):""}
 function ask(q){if(!q.trim())return;hush();add("me",q.replace(/</g,"&lt;"));ME.asked++;
  const s=q.toLowerCase();
+ if(LANG!=="en"){askL(s);return}
  if(/tour|walk me|guide me|show me around|explain (the )?(whole|design|everything)/.test(s)){startTour();return}
  if(/^(yes|yeah|yup|sure|ok|okay|haan|ha|please|go on)\b/.test(s)&&ME.offer){const f=ME.offer;ME.offer=null;setTimeout(f,300);return}
  if(/surprise|random|fun fact|did you know|something interesting|tell me something/.test(s)){setTimeout(()=>reply(pick(FACTS)+" "+pick(["Want another one?","Pretty neat, right?","Shall I show you where that is?"]),null,1),350);return}
- if(/(more|else|continue|go on|and\?|tell me more|what else)/.test(s)&&ME.last){const e=ME.last;setTimeout(()=>{if((ME.used[e.id]||0)<e.v.length)reply(nextVar(e)+follow(e),actFor(e),1);else reply("That's most of what I know about that one! "+pick(FACTS),null,1)},350);return}
+ if(/(more|else|continue|go on|and\?|tell me more|what else)/.test(s)&&ME.last){const e=ME.last;setTimeout(()=>{if((ME.used[e.id]||0)<e.v.length)reply(nextVar(e)+follow(e),actFor(e),1);else reply("That's most of what I know about that one. "+pick(FACTS),null,1)},350);return}
  // who is it for
  const who=/kid|child|baby|young family|family with/.test(s)?"family":/parent|mother|father|elder|in-?laws|grand/.test(s)&&/my |for /.test(s)?"parents":/couple|wife|husband|two of us|just us|partner|myself|alone|single/.test(s)?"couple":null;
- if(who&&!ME.who&&ME.askedWho){ME.who=who;const line={family:"A young family, how lovely! Then I'll make sure to show you the courtyard lawn, the pool and the games room. The kids are going to run this place.",parents:"That's so thoughtful of you. I'll point out the calm spots: the quiet lounges, morning yoga, and the pool gallery.",couple:"Lovely! Then let me show you the quieter pleasures: early swims, movie nights and that Sunday-morning courtyard."}[who];setTimeout(()=>reply(line+" Shall we start the tour?",{label:"▶ Start the tour",fn:startTour},1),350);ME.offer=startTour;return}
+ if(who&&!ME.who&&ME.askedWho){ME.who=who;const line={family:"A young family, how lovely. Then I'll make sure to show you the courtyard lawn, the pool and the games room. The kids are going to run this place.",parents:"That's so thoughtful of you. I'll point out the calm spots: the quiet lounges, morning yoga, and the pool gallery.",couple:"Lovely. Then let me show you the quieter pleasures: early swims, movie nights and that Sunday-morning courtyard."}[who];setTimeout(()=>reply(line+" Shall we start the tour?",{label:"▶ Start the tour",fn:startTour},1),350);ME.offer=startTour;return}
  const hit=KB.find(e=>e.k.test(s));
  const sp=!hit&&SPACES.find(x=>x.r.length&&s.includes(x.n.toLowerCase().split(/[ &]/)[0]));
  setTimeout(()=>{
@@ -1582,8 +1727,19 @@ function ask(q){if(!q.trim())return;hush();add("me",q.replace(/</g,"&lt;"));ME.a
    if(!hit.n)txt+=follow(hit);const act=actFor(hit);ME.offer=act?act.fn:null;
    reply(txt,act,hit.n);if(hit.go&&!hit.space&&hit.id!=="plan"&&hit.id!=="floors")go(hit.go);if(hit.id==="plan"||hit.id==="floors")go("plans");
    if(hit.id==="hello"&&!ME.who){ME.askedWho=true;drawChips(["A young family","For my parents","Just the two of us","Take the tour"])}}
-  else if(sp){ME.last=null;reply(`Ah, the ${sp.n.toLowerCase()}! ${sp.l} Shall I show it to you?`,{label:"Show me",fn:()=>viewSpace(sp.n)},1);ME.offer=()=>viewSpace(sp.n)}
-  else reply(pick(["Hmm, that one's a little outside what I know. I'm only an expert on this clubhouse!","Ooh, good one, but I don't want to give you the wrong answer."])+" Your Ankura Homes relationship manager can help with that. Meanwhile, can I tell you something fun? "+pick(FACTS),null,1);
+  else if(sp){ME.last=null;reply(`The ${sp.n.toLowerCase()}. ${sp.l} Shall I show it to you?`,{label:"Show me",fn:()=>viewSpace(sp.n)},1);ME.offer=()=>viewSpace(sp.n)}
+  else reply(UI.en.fallback);
+ },380)}
+function askL(s){
+ if(/tour|टूर|టూర్|घुमाइए|చూపించండి అన్నీ/.test(s)){startTour();return}
+ const pack=KBL[LANG];let id=Object.keys(pack).find(k=>pack[k][0].test(s));
+ if(!id){const h=KB.find(e=>e.k.test(s));if(h)id=h.id==="floors"?"plan":h.id}
+ const e=id&&KB.find(x=>x.id===id);
+ setTimeout(()=>{
+  if(id==="present"){const a=actFor(e);reply(L().pres+".",a&&{label:L().pres,fn:a.fn});return}
+  if(id&&pack[id]){const a=e&&actFor(e);const act=a&&{label:id==="where"?L().map:L().show,fn:a.fn};
+   reply(pack[id][1],act);if(e&&e.go&&!e.space&&id!=="plan")go(e.go);if(id==="plan")go("plans")}
+  else reply(L().fallback);
  },380)}
 function actFor(e){if(e.act)return e.act;if(e.space)return{label:"Show me the "+e.space.toLowerCase(),fn:()=>viewSpace(e.space)};if(e.go)return{label:e.label||"Show me",fn:()=>go(e.go)};return null}
 
@@ -1622,11 +1778,11 @@ function gtShow(target,est){gtClear();const plan=$("#gt-plan");
  gtV.pause();const list=[...(M.img||[]),...(M.r||[]).map(n=>img(n))];const per=Math.max(3600,est/list.length);
  list.forEach((src,k)=>gtTimers.push(setTimeout(()=>gtImg(src),k*per)));
  list.slice(1,3).forEach(s=>{const im=new Image();im.src=s})}
-function gtCaption(text){const parts=text.match(/[^.!?]+[.!?]*/g)||[text];$("#gt-text").innerHTML=parts.map((p,k)=>`<span data-k="${k}">${p.trim()} </span>`).join("");return parts.length}
+function gtCaption(text){const parts=text.match(/[^.!?।]+[.!?।]*/g)||[text];$("#gt-text").innerHTML=parts.map((p,k)=>`<span data-k="${k}">${p.trim()} </span>`).join("");return parts.length}
 function gtMark(k){$("#gt-text").querySelectorAll("span").forEach(s=>s.classList.toggle("now",k<0||+s.dataset.k===k))}
 function gtDots(i,ms){$("#gt-dots").innerHTML=TOUR.map((_,k)=>`<i class="${k<i?"done":k===i?"cur":""}" style="--d:${ms}ms"></i>`).join("")}
 function tourStep(i){T.i=i;if(i<0)i=T.i=0;if(i>=TOUR.length){endTour(true);return}
- const [title,target,fn]=TOUR[i],text=fn();
+ const [tt,target,fn]=TOUR[i],TL=TOUR_T[LANG],title=TL?TL.titles[i]:tt,text=TL?TL.texts[i]:fn();
  $("#gd-step").textContent=`${i+1}/${TOUR.length} · ${title}`;$("#gd-prog").style.width=((i+1)/TOUR.length*100)+"%";
  $("#gt-chap").textContent=`${title}`;$("#gt-n").textContent=`${i+1} / ${TOUR.length}`;
  const est=Math.max(target==="ARRIVAL"?16000:6000,text.split(/\s+/).length*360);
@@ -1635,21 +1791,21 @@ function tourStep(i){T.i=i;if(i<0)i=T.i=0;if(i>=TOUR.length){endTour(true);retur
  add("her",text);
  const t0=Date.now(),minMs=text.split(/\s+/).length*300+(target==="ARRIVAL"?4000:0);
  say(text,()=>{if(T.on&&!T.paused&&T.i===i)setTimeout(()=>{if(T.on&&!T.paused&&T.i===i)tourStep(i+1)},1100+Math.max(0,minMs-(Date.now()-t0)))},k=>gtMark(k))}
-function startTour(){hush();T={i:-1,on:true,paused:false};gd.classList.remove("on");fab.classList.remove("show");GT.classList.add("on");GT.classList.remove("paused");document.body.style.overflow="hidden";$("#gt-play").textContent="❚❚ Pause";$("#gt-play").dataset.i="❚❚";$("#gt-mute").textContent=voiceOn?"♪ Sound":"♪ Muted";$("#gt-mute").dataset.i=voiceOn?"♪":"✕♪";tourStep(0)}
+function startTour(){hush();T={i:-1,on:true,paused:false};gd.classList.remove("on");fab.classList.remove("show");GT.classList.add("on");GT.classList.remove("paused");document.body.style.overflow="hidden";$("#gt-play").textContent=L().pause;$("#gt-play").dataset.i="❚❚";$("#gt-mute").textContent=voiceOn?L().snd:L().mute;$("#gt-mute").dataset.i=voiceOn?"♪":"✕♪";tourStep(0)}
 function endTour(done){T.on=false;gtClear();hush();gtV.pause();GT.classList.remove("on");document.body.style.overflow="";$("#gd-tourbar").hidden=true;
- if(done){const t="That's our tour! I hope you enjoyed it. Ask me anything you like, or tap a topic below.";gd.classList.add("on");add("her",t);say(t);drawChips(["Why the curves?","Surprise me","What will my kids love?","Show the floor plans","Where is it?"])}else showFab()}
-function gtPause(){if(!T.on)return;T.paused=!T.paused;GT.classList.toggle("paused",T.paused);$("#gt-play").textContent=T.paused?"▶ Play":"❚❚ Pause";$("#gt-play").dataset.i=T.paused?"▶":"❚❚";if(T.paused){hush();gtClear();gtV.pause()}else tourStep(T.i)}
+ if(done){const t=L().end;gd.classList.add("on");add("her",t);say(t);drawChips(L().endChips)}else showFab()}
+function gtPause(){if(!T.on)return;T.paused=!T.paused;GT.classList.toggle("paused",T.paused);$("#gt-play").textContent=T.paused?L().play:L().pause;$("#gt-play").dataset.i=T.paused?"▶":"❚❚";if(T.paused){hush();gtClear();gtV.pause()}else tourStep(T.i)}
 $("#gt-play").onclick=gtPause;$("#gt-next").onclick=()=>{if(!T.on)return;T.paused=false;GT.classList.remove("paused");hush();tourStep(T.i+1)};$("#gt-prev").onclick=()=>{if(!T.on)return;T.paused=false;GT.classList.remove("paused");hush();tourStep(Math.max(0,T.i-1))};
 $("#gt-x").onclick=()=>endTour(false);
-$("#gt-mute").onclick=()=>{$("#gd-mute").click();$("#gt-mute").textContent=voiceOn?"♪ Sound":"♪ Muted";$("#gt-mute").dataset.i=voiceOn?"♪":"✕♪";if(T.on&&!T.paused&&voiceOn)tourStep(T.i)};
+$("#gt-mute").onclick=()=>{$("#gd-mute").click();$("#gt-mute").textContent=voiceOn?L().snd:L().mute;$("#gt-mute").dataset.i=voiceOn?"♪":"✕♪";if(T.on&&!T.paused&&voiceOn)tourStep(T.i)};
 addEventListener("keydown",e=>{if(!GT.classList.contains("on"))return;if(e.key==="Escape"){endTour(false)}else if(e.key==="ArrowRight"){$("#gt-next").click()}else if(e.key==="ArrowLeft"){$("#gt-prev").click()}else if(e.key===" "){e.preventDefault();gtPause()}});
 $("#gd-pause").onclick=gtPause;
 $("#gd-stop").onclick=()=>endTour(false);
 
 /* --- little remarks as the visitor explores (text only, never interrupting) --- */
-const REMARK={heart:"Oh, you've reached the courtyard. That's my favourite spot!",different:"Want the story behind any of these? Just ask me 'why'.",floors:"Psst, tap a card and I'll show you every view of that space.",plans:"Tip: tap a number on the plan and the room lights up.",day:"Which part of this day sounds most like you?",materials:"Ask me why the designers chose these materials. There's a nice reason!",gallery:"My favourite view? The courtyard from the first floor."};
+const REMARK={heart:"You've reached the courtyard. That's my favourite spot.",different:"Want the story behind any of these? Just ask me 'why'.",floors:"Tap a card and I'll show you every view of that space.",plans:"Tip: tap a number on the plan and the room lights up.",day:"Which part of this day sounds most like you?",materials:"Ask me why the designers chose these materials. There's a nice reason.",gallery:"My favourite view? The courtyard from the first floor."};
 const seen=new Set();
-const ro2=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting||seen.has(e.target.id)||T.on)return;seen.add(e.target.id);const r=REMARK[e.target.id];if(!r)return;
+const ro2=new IntersectionObserver(es=>es.forEach(e=>{if(LANG!=="en"||!e.isIntersecting||seen.has(e.target.id)||T.on)return;seen.add(e.target.id);const r=REMARK[e.target.id];if(!r)return;
  if(gd.classList.contains("on")){add("her",r)}else{teaser(r)}}),{threshold:.35});
 Object.keys(REMARK).forEach(id=>{const el=document.getElementById(id);el&&ro2.observe(el)});
 let teaserN=0;function teaser(t){if(!fab.classList.contains("show")||teaserN>=2||innerWidth<700)return;teaserN++;let b=document.getElementById("gd-teaser");if(!b){b=document.createElement("div");b.id="gd-teaser";b.className="gd-teaser";document.body.appendChild(b);b.onclick=()=>{b.classList.remove("on");open()}}b.textContent=t;b.classList.add("on");clearTimeout(teaser.t);teaser.t=setTimeout(()=>b.classList.remove("on"),6500)}
@@ -1657,18 +1813,27 @@ let teaserN=0;function teaser(t){if(!fab.classList.contains("show")||teaserN>=2|
 /* --- open / close --- */
 let greeted=false;
 function open(){gd.classList.add("on");fab.classList.remove("show");
- if(!greeted){greeted=true;greetedNow=true;setTimeout(()=>greetedNow=false,3000);const t=`${hello()}! I'm Harshitha, and I'll be showing you around the Konak clubhouse today. I'd love to tell you the story of this design, how it works and why it's built the way it is. I can walk you through it from the very beginning, or you can ask me anything. But first, who are you imagining living here?`;ME.askedWho=true;add("her",t,{label:"▶ Start the tour from the beginning",fn:startTour});say(t);drawChips(["A young family","For my parents","Just the two of us","Take the tour","Surprise me"])}
+ if(!greeted){greeted=true;greetedNow=true;setTimeout(()=>greetedNow=false,3000);const t=GREET[LANG](hello());if(LANG==="en")ME.askedWho=true;add("her",t,{label:L().start,fn:startTour});say(t);drawChips(LANG==="en"?["A young family","For my parents","Just the two of us","Take the tour","Surprise me"]:L().chips);voiceNote()}
  setTimeout(()=>$("#gd-q").focus({preventScroll:true}),300)}
 function close(){if(T.on)endTour(false);gd.classList.remove("on");hush();stopGlide();gd.classList.remove("touring");T.on=false;$("#gd-tourbar").hidden=true;showFab()}
 fab.onclick=open;$("#gd-x").onclick=close;
 $("#gd-mute").onclick=()=>{voiceOn=!voiceOn;$("#gd-mute").textContent=voiceOn?"🔊":"🔇";$("#gd-mute").setAttribute("aria-label",voiceOn?"Turn voice off":"Turn voice on");try{localStorage.setItem("gd-voice",voiceOn?"on":"off")}catch(e){}if(!voiceOn&&synth)synth.cancel()};
+let noted={};function voiceNote(){if(LANG!=="en"&&voiceOn&&synth&&!voiceFor(LANG)&&!noted[LANG]){noted[LANG]=1;add("her","<small>"+L().novoice+"</small>")}}
+const SWITCHED={en:"Sure. I'll speak in English now.",hi:"ठीक है, अब मैं हिन्दी में बात करूँगी।",te:"సరే, ఇప్పుడు నేను తెలుగులో మాట్లాడతాను."};
+function paintLang(){const u=L();document.querySelectorAll(".gd-lang button").forEach(b=>{b.classList.toggle("on",b.dataset.l===LANG);b.setAttribute("aria-pressed",b.dataset.l===LANG)});
+ $("#gd-q").placeholder=u.ph;$("#gd-note").textContent=u.note;$("#gt-prev").textContent=u.back;$("#gt-next").textContent=u.next;$("#gt-x").textContent=u.exit;
+ $("#gt-play").textContent=T.paused?u.play:u.pause;$("#gt-mute").textContent=voiceOn?u.snd:u.mute;$("#gd-pause").textContent=u.tourLbl;$("#gd-stop").textContent=u.stopLbl;gd.setAttribute("lang",LANGS[LANG].code);GT.setAttribute("lang",LANGS[LANG].code)}
+function setLang(l){if(!LANGS[l]||l===LANG)return;LANG=l;try{localStorage.setItem("gd-lang",l)}catch(e){}paintLang();hush();
+ if(T.on){if(!T.paused)tourStep(T.i);else{const TL=TOUR_T[LANG];gtCaption(TL?TL.texts[T.i]:TOUR[T.i][2]());$("#gt-chap").textContent=TL?TL.titles[T.i]:TOUR[T.i][0]}return}
+ if(greeted){reply(SWITCHED[l]);drawChips(LANG==="en"?SUGG:L().chips);voiceNote()}}
+document.querySelectorAll(".gd-lang button").forEach(b=>b.onclick=e=>{e.preventDefault();setLang(b.dataset.l)});paintLang();
 window.HARSHITHA={ask:q=>{open();setTimeout(()=>ask(q),greetedNow?2600:100)},open};let greetedNow=false;
 $("#gd-form").onsubmit=e=>{e.preventDefault();const q=$("#gd-q").value;$("#gd-q").value="";ask(q)};
 addEventListener("keydown",e=>{if(e.key==="Escape"&&gd.classList.contains("on")&&!document.querySelector(".lb.on,.pres.on"))close()});
 
 /* --- voice questions --- */
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;const mic=$("#gd-mic");
-if(!SR)mic.hidden=true;else{let rec=null;mic.onclick=()=>{if(rec){rec.stop();return}hush();rec=new SR();rec.lang="en-IN";rec.interimResults=false;rec.maxAlternatives=1;mic.classList.add("rec");
+if(!SR)mic.hidden=true;else{let rec=null;mic.onclick=()=>{if(rec){rec.stop();return}hush();rec=new SR();rec.lang=LANGS[LANG].code;rec.interimResults=false;rec.maxAlternatives=1;mic.classList.add("rec");
  rec.onresult=e=>{const t=e.results[0][0].transcript;ask(t)};rec.onend=()=>{mic.classList.remove("rec");rec=null};rec.onerror=()=>{mic.classList.remove("rec");rec=null};try{rec.start()}catch(e){mic.classList.remove("rec");rec=null}}}
 
 /* --- show the button once the arrival is over --- */
@@ -1679,7 +1844,6 @@ addEventListener("scroll",showFab,{passive:true});showFab();
 document.addEventListener("click",e=>{if(e.target.closest("[data-present]"))hush()},true);
 })();
 </script>
-
 <!-- ===== Page animations ===== -->
 <style>
 /* reading progress */
