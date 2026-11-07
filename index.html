@@ -1733,7 +1733,7 @@ function ask(q){if(!q.trim())return;hush();add("me",q.replace(/</g,"&lt;"));ME.a
 function askL(s){
  if(/tour|टूर|టూర్|घुमाइए|చూపించండి అన్నీ/.test(s)){startTour();return}
  const pack=KBL[LANG];let id=Object.keys(pack).find(k=>pack[k][0].test(s));
- if(!id){const h=KB.find(e=>e.k.test(s));if(h)id=h.id==="floors"?"plan":h.id}
+ if(!id){const h=KB.find(e=>e.id!=="hello"&&e.k.test(s))||KB.find(e=>e.k.test(s));if(h)id=h.id==="floors"?"plan":h.id}
  const e=id&&KB.find(x=>x.id===id);
  setTimeout(()=>{
   if(id==="present"){const a=actFor(e);reply(L().pres+".",a&&{label:L().pres,fn:a.fn});return}
